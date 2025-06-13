@@ -1,0 +1,76 @@
+
+
+<div class="container">
+  <h1>Dashboard</h1>
+
+  <div class="metrics">
+    <mat-card>
+      <h3>TCEA Promedio</h3>
+      <p class="value">5.75%</p>
+    </mat-card>
+    <mat-card>
+      <h3>TREA Promedio</h3>
+      <p class="value">5.75%</p>
+    </mat-card>
+  </div>
+
+  <div class="bonos-header">
+    <h2>Bonos Registrados</h2>
+    <button mat-raised-button class="nuevo-bono-btn" [routerLink]="'/nuevo-bono'">
+      Nuevo Bono
+    </button>
+  </div>
+
+
+  <table mat-table [dataSource]="bonos" class="mat-elevation-z2 full-width-table">
+
+    <!-- Nombre -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.nombre}} </td>
+    </ng-container>
+
+    <!-- Valor Nominal -->
+    <ng-container matColumnDef="valorNominal">
+      <th mat-header-cell *matHeaderCellDef> Valor Nominal </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.valorNominal}} </td>
+    </ng-container>
+
+    <!-- Tasa Cupón -->
+    <ng-container matColumnDef="tasaCupon">
+      <th mat-header-cell *matHeaderCellDef> Tasa Cupón </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.tasaCupon}} </td>
+    </ng-container>
+
+    <!-- Fecha Emisión -->
+    <ng-container matColumnDef="fechaEmision">
+      <th mat-header-cell *matHeaderCellDef> Fecha Emisión </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.fechaEmision}} </td>
+    </ng-container>
+
+    <!-- Fecha Vencimiento -->
+    <ng-container matColumnDef="fechaVencimiento">
+      <th mat-header-cell *matHeaderCellDef> Fecha Vencimiento </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.fechaVencimiento}} </td>
+    </ng-container>
+
+    <!-- Frecuencia -->
+    <ng-container matColumnDef="frecuencia">
+      <th mat-header-cell *matHeaderCellDef> Frecuencia </th>
+      <td mat-cell *matCellDef="let bono"> {{bono.frecuencia}} </td>
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let bono">
+        <button mat-icon-button color="primary"><mat-icon>visibility</mat-icon></button>
+        <button mat-icon-button color="accent"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

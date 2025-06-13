@@ -1,0 +1,108 @@
+.informacion-general {
+  padding: 2px 16px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.form-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+mat-label {
+  font-size: 14px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.amount-field {
+  width: 200px;
+}
+
+.radio-option {
+  display: block;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #4CAF50;
+}
+
+.mat-radio-button.mat-primary .mat-radio-inner-circle {
+  background-color: #4CAF50;
+}
+
+.mat-checkbox.mat-primary.mat-checkbox-checked .mat-checkbox-background {
+  background-color: #4CAF50;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  gap: 16px;
+  width: 100%;
+}
+
+.cancel-button {
+  margin-top: 16px;
+  color: #007a58;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.siguiente-button {
+  background-color: #00966C;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.siguiente-button:hover {
+  background-color: #007a58;
+}
+
+.cancel-button:hover {
+  background-color: #E5E2E2;
+}

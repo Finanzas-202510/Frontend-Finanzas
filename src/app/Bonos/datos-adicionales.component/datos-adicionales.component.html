@@ -1,0 +1,53 @@
+<div class="datos-adicionales">
+  <h1>Datos Adicionales</h1>
+  <p class="subtitle">Complete la información adicional del bono</p>
+
+  <div class="form-section">
+    <h2>Estructuración (%)</h2>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <input matInput type="number" value="0.75">
+      </mat-form-field>
+      <span class="input-label">Fotación (%)</span>
+    </div>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <input matInput type="number" value="0.50">
+      </mat-form-field>
+      <span class="input-label">Incluir Período de Gracia</span>
+    </div>
+
+    <h2>Colocación (%)</h2>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <input matInput type="number" value="0.30">
+      </mat-form-field>
+      <span class="input-label">Interbank (%)</span>
+    </div>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <input matInput type="number" value="0.50">
+      </mat-form-field>
+    </div>
+
+    <h3>Tipo de Período de Gracia</h3>
+    <mat-radio-group class="radio-group">
+      <mat-radio-button value="parcial" class="radio-option">Parcial</mat-radio-button>
+      <mat-radio-button value="total" class="radio-option">Total</mat-radio-button>
+    </mat-radio-group>
+
+    <h3>Fotación (%)</h3>
+    <mat-form-field appearance="outline" class="full-width">
+      <input matInput type="number">
+    </mat-form-field>
+  </div>
+
+  <div class="button-row">
+    <button mat-raised-button class="cancel-button" (click)="retrocederSeccion.emit('financieros')">Anterior</button>
+    <button mat-raised-button class="siguiente-button">Guardar Bono</button>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="informacion-general">
+  <h1>Información General</h1>
+  <p class="subtitle">Ingrese la información básica del bono corporativo</p>
+
+  <div class="form-section">
+    <h2>Nombre del Bono</h2>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ej: Bono Corporativo INTERBANK</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </div>
+
+  <div class="form-section">
+    <h2>Descripción</h2>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción breve del bono</mat-label>
+      <textarea matInput rows="3"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="form-section">
+    <h3>Valor Nominal</h3>
+    <mat-form-field appearance="outline" class="amount-field">
+      <input matInput type="number" value="1000.00">
+      <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <div class="form-section">
+      <h3>Tipo de Tasa de Interés</h3>
+      <mat-radio-group>
+        <mat-radio-button value="efectiva" class="radio-option">Efectiva</mat-radio-button>
+        <mat-radio-button value="nominal" class="radio-option">Nominal</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-section">
+      <h3>Moneda</h3>
+      <mat-radio-group>
+        <mat-radio-button value="usd" class="radio-option">Dólares (USD)</mat-radio-button>
+        <mat-radio-button value="otros" class="radio-option">Otra moneda</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="button-row">
+      <button mat-raised-button class="cancel-button" [routerLink]="'/dashboard'">Cancelar</button>
+      <button mat-raised-button (click)="avanzarSeccion.emit('financieros')" class="siguiente-button">Siguiente</button>
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Cambia el color primario a verde */
+.mat-primary .mat-radio-outer-circle,
+.mat-primary .mat-checkbox-frame,
+.mat-primary .mat-slide-toggle-thumb,
+.mat-primary .mat-slider-thumb {
+  border-color: #4CAF50 !important;
+}
+
+.mat-primary .mat-radio-inner-circle,
+.mat-primary .mat-radio-ripple .mat-ripple-element,
+.mat-primary .mat-checkbox-background,
+.mat-primary .mat-checkbox-ripple .mat-ripple-element,
+.mat-primary .mat-slide-toggle-bar,
+.mat-primary .mat-slider-track-fill {
+  background-color: #4CAF50 !important;
+}
+
+/* Botones primarios */
+.mat-raised-button.mat-primary,
+.mat-flat-button.mat-primary {
+  background-color: #4CAF50;
+}
+
+/* Inputs con focus */
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #4CAF50;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #4CAF50;
+}

@@ -1,0 +1,55 @@
+<div class="datos-financieros">
+  <h1>Datos Financieros</h1>
+  <p class="subtitle">Ingrese los datos financieros del bono</p>
+
+  <div class="form-row">
+    <div class="form-column">
+      <h2>Tasa Cupón (% anual)</h2>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ej: Bono Corporativo INTERBANK</mat-label>
+        <input matInput type="number">
+      </mat-form-field>
+
+      <h3>Fecha de Emisión</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>dd / mm / aaaa</mat-label>
+        <input matInput [matDatepicker]="pickerEmision">
+        <mat-datepicker-toggle matSuffix [for]="pickerEmision"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEmision></mat-datepicker>
+      </mat-form-field>
+
+      <h3>Frecuencia de Pago</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-select>
+          <mat-option value="semestral">Semestral</mat-option>
+          <mat-option value="anual">Anual</mat-option>
+          <mat-option value="trimestral">Trimestral</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h3>Prima de Redención (%)</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput type="number" value="0">
+      </mat-form-field>
+    </div>
+
+    <div class="form-column">
+      <h2>Tasa de Mercado (% anual)</h2>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput type="number">
+      </mat-form-field>
+
+      <h3>Fecha de Vencimiento</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>dd / mm / aaaa</mat-label>
+        <input matInput [matDatepicker]="pickerVencimiento">
+        <mat-datepicker-toggle matSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
+        <mat-datepicker #pickerVencimiento></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="button-row">
+    <button mat-raised-button (click)="retrocederSeccion.emit('general')" class="cancel-button">Anterior</button>
+    <button mat-raised-button (click)="avanzarSeccion.emit('adicionales')" class="siguiente-button">Siguiente</button>
+  </div>
+</div>

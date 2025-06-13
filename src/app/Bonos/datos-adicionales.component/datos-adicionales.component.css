@@ -1,0 +1,121 @@
+.datos-adicionales {
+  padding: 16px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #616161;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.percentage-input {
+  width: 120px;
+}
+
+.input-label {
+  font-size: 14px;
+  color: #616161;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.radio-option {
+  margin-right: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-divider {
+  margin: 24px 0;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.secondary-button {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.primary-button {
+  min-width: 150px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  gap: 16px;
+  width: 100%;
+}
+
+.cancel-button {
+  margin-top: 16px;
+  color: #007a58;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.siguiente-button {
+  background-color: #00966C;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.siguiente-button:hover {
+  background-color: #007a58;
+}
+
+.cancel-button:hover {
+  background-color: #E5E2E2;
+}

@@ -1,0 +1,14 @@
+<h1>Nuevo Bono</h1>
+<p class="Description-new">Complete el formulario para crear un nuevo bono corporativo</p>
+
+<mat-button-toggle-group [(ngModel)]="seccionActiva">
+  <mat-button-toggle value="general">Información General</mat-button-toggle>
+  <mat-button-toggle value="financieros">Datos Financieros</mat-button-toggle>
+  <mat-button-toggle value="adicionales">Datos Adicionales</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="contenido-seccion">
+  <app-informacion-general *ngIf="seccionActiva === 'general'" (avanzarSeccion)="cambiarSeccion($event)"></app-informacion-general>
+  <app-datos-financieros *ngIf="seccionActiva === 'financieros'" (avanzarSeccion)="cambiarSeccion($event)" (retrocederSeccion)="cambiarSeccion($event)"></app-datos-financieros>
+  <app-datos-adicionales *ngIf="seccionActiva === 'adicionales'" (retrocederSeccion)="cambiarSeccion($event)"></app-datos-adicionales>
+</div>
