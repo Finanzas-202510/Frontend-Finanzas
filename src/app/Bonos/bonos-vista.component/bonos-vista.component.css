@@ -1,0 +1,45 @@
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.actions {
+  margin-bottom: 30px;
+}
+.actions a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #0066cc;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
+h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.bond-title {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.bond-description {
+  margin-bottom: 20px;
+  color: #666;
+}
+.details-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.detail-column {
+  width: 50%;
+  margin-bottom: 15px;
+}
+.detail-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.detail-value {
+  margin-bottom: 10px;
+}

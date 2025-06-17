@@ -1,0 +1,77 @@
+{
+  "bonos": [
+    {
+      "id": 1,
+      "nombre": "Bono Corporativo INTERBANK",
+      "moneda": "USD",
+      "valorNominal": 1500.00,
+      "valorComercial": 1050.00,
+      "tasaDeInteresAnualParaCalculo": 0.0725,
+      "fechaEmision": "2025-01-14",
+      "fechaVencimiento": "2028-01-14",
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "primaRedencionPorcentaje": 0.01,
+
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.01,
+        "colocacionPorcentaje": 0.0025,
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Bono Corporativo BCP",
+      "moneda": "PEN",
+      "valorNominal": 5000.00,
+      "valorComercial": 5000.00,
+      "tasaDeInteresAnualParaCalculo": 0.0650,
+      "fechaEmision": "2025-02-09",
+      "fechaVencimiento": "2027-02-09",
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "primaRedencionPorcentaje": 0.01,
+
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.01,
+        "colocacionPorcentaje": 0.0025,
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Bono Corporativo BBVA",
+      "moneda": "USD",
+      "valorNominal": 10000.00,
+      "valorComercial": 10000.00,
+      "tasaDeInteresAnualParaCalculo": 0.0650,
+      "fechaEmision": "2025-03-04",
+      "fechaVencimiento": "2030-03-04",
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "primaRedencionPorcentaje": 0.01,
+
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.01,
+        "colocacionPorcentaje": 0.0025,
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.0045,
+        "cavaliPorcentaje": 0.0050
+      }
+    }
+  ],
+  "planesDePago": []
+}

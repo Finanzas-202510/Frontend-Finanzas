@@ -11,7 +11,6 @@ import {MatButton} from '@angular/material/button';
     MatInput,
     MatRadioGroup,
     MatRadioButton,
-    MatDivider,
     MatButton
   ],
   templateUrl: './datos-adicionales.component.html',
