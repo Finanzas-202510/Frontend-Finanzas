@@ -1,45 +1,235 @@
-h1 {
-  font-size: 20px;
-  margin-bottom: 20px;
+/* Estilos globales y reseteo básico */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8; /* Fondo ligero similar al de la imagen */
+  color: #333;
 }
-.actions {
-  margin-bottom: 30px;
+
+/* Contenedor principal de la vista */
+.bond-details-layout {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px 30px; /* Ajuste para dar más espacio horizontal */
+  max-width: 900px; /* Ancho máximo similar al de la imagen */
 }
-.actions a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #0066cc;
+
+/* Sección de encabezado (Título principal y acciones) */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px; /* Espacio antes del HR */
 }
+
+.header-section h1 {
+  font-size: 24px; /* Un poco más grande para el título principal */
+  margin: 0; /* Elimina margen predeterminado */
+  color: #333;
+}
+
+.actions button {
+  background-color: #f0f0f0; /* Fondo gris claro para los botones */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: background-color 0.2s, border-color 0.2s;
+  margin-left: 10px; /* Espacio entre botones */
+}
+
+.actions button:hover {
+  background-color: #e0e0e0;
+  border-color: #bbb;
+}
+
+/* Línea divisoria */
 hr {
-  border: 0;
+  border: none;
   height: 1px;
-  background-color: #ddd;
+  background-color: #eee; /* Color más claro para la línea */
   margin: 20px 0;
 }
-h2 {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-.bond-title {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-.bond-description {
-  margin-bottom: 20px;
+
+/* Mensajes de carga y error */
+.loading-message,
+.error-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
   color: #666;
 }
-.details-container {
-  display: flex;
-  flex-wrap: wrap;
+
+.error-message {
+  color: #d9534f; /* Rojo para errores */
 }
-.detail-column {
-  width: 50%;
-  margin-bottom: 15px;
+
+/* Título del bono y descripción */
+.bond-header {
+  margin-bottom: 25px; /* Espacio después del encabezado del bono */
 }
-.detail-label {
+
+.bond-title {
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #333;
+  margin-bottom: 5px; /* Menos espacio entre título y descripción */
 }
+
+.bond-description {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 0; /* Elimina margen inferior */
+}
+
+/* Estilo para las secciones de detalles (main, costos emisor, costos bonista) */
+.details-grid {
+  display: grid;
+  /* Configura 3 columnas para la sección principal y 2 para costos */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 40px; /* Espacio vertical y horizontal entre items */
+  margin-bottom: 30px; /* Espacio después de cada grid de detalles */
+}
+
+/* Ajuste para las secciones de costos que tienen menos columnas */
+.cost-grid {
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas para costos */
+}
+
+/* Estilo de cada item de detalle (label y value) */
+.detail-item {
+  /* Alinea el label y el valor */
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 13px; /* Más pequeño para el label */
+  color: #888; /* Gris claro para el label */
+  margin-bottom: 3px; /* Espacio entre label y value */
+  white-space: nowrap; /* Evita que el label se rompa en varias líneas */
+}
+
 .detail-value {
+  font-size: 16px; /* Tamaño normal para el valor */
+  color: #333;
+  font-weight: normal; /* Asegura que el valor no sea bold por defecto si no lo deseas */
+}
+
+.detail-value strong {
+  font-weight: bold; /* Solo el valor numérico en negrita */
+}
+
+/* Títulos de sección (Costos del Emisor/Bonista) */
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px; /* Espacio antes del grid de costos */
+  color: #333;
+}
+
+/* Media queries para responsividad (opcional pero recomendado) */
+@media (max-width: 768px) {
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+    gap: 15px 25px;
+  }
+  .bond-details-layout {
+    margin: 15px;
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .details-grid,
+  .cost-grid {
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+    gap: 10px;
+  }
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .actions {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .actions button {
+    margin-left: 0;
+    width: calc(33% - 10px); /* Ajusta para 3 botones */
+    padding: 8px 5px; /* Reduce padding para botones más pequeños */
+    font-size: 12px;
+  }
+}
+
+/* Estilos para el título del flujo de caja */
+.section-title {
+  margin-top: 40px; /* Más espacio arriba para separar de la sección anterior */
   margin-bottom: 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.bond-description {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de la tabla */
+.cash-flow-table-container {
+  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Estilos de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  white-space: nowrap; /* Evita que el contenido de las celdas se rompa */
+}
+
+table thead {
+  background-color: #f0f0f0; /* Fondo gris claro para el encabezado */
+}
+
+table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Rayado para filas impares */
+}
+
+table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+/* Estilo para el flujo de caja negativo y positivo */
+.negative-flow {
+  color: #d9534f; /* Rojo */
+  font-weight: bold;
+}
+
+.positive-flow {
+  color: #5cb85c; /* Verde */
+  font-weight: bold;
 }

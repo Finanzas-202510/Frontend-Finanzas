@@ -1,78 +1,123 @@
-<h1>Detalles del Bono</h1>
-<div class="actions">
-  <a [routerLink]="'/dashboard'">Volver</a>
-  <a href="#">Imprimir</a>
-  <a href="#">Exportar PDF</a>
+<div class="header-section">
+  <h1>Detalles del Bono</h1>
+  <div class="actions">
+    <button (click)="goBack()">Volver</button>
+    <button (click)="print()">Imprimir</button>
+    <button (click)="exportPdf()">Exportar PDF</button>
+  </div>
 </div>
 
-<hr>
+<hr />
 
-<div *ngIf="loading" style="text-align: center; margin-top: 20px;">
+<div *ngIf="loading" class="loading-message">
   <p>Cargando detalles del bono...</p>
 </div>
 
-<div *ngIf="error" style="text-align: center; margin-top: 20px; color: red;">
+<div *ngIf="error" class="error-message">
   <p>{{ error }}</p>
 </div>
 
-<div *ngIf="bono && !loading && !error" class="details-container">
-  <h2>{{ bono.nombre }}</h2>
-  <div class="details-container">
-    <div class="detail-column">
+<div *ngIf="bono && !loading && !error" class="bond-details-layout">
+  <div class="bond-header">
+    <h2 class="bond-title">Bono Corporativo {{ bono.nombre }}</h2>
+    <p class="bond-description">
+      {{ bono.descripcion }}
+    </p>
+  </div>
+
+  <div class="details-grid main-details-grid">
+    <div class="detail-item">
       <div class="detail-label">Valor Nominal</div>
       <div class="detail-value"><strong>{{ bono.moneda }} {{ bono.valorNominal | number:'1.2-2' }}</strong></div>
-
-      <div class="detail-label">Valor Comercial</div>
-      <div class="detail-value"><strong>{{ bono.moneda }} {{ bono.valorComercial | number:'1.2-2' }}</strong></div>
-
+    </div>
+    <div class="detail-item">
       <div class="detail-label">Tasa Cupón (TEA)</div>
       <div class="detail-value"><strong>{{ bono.tasaDeInteresAnualParaCalculo * 100 | number:'1.2-2'}}% anual</strong></div>
+    </div>
 
+    <div class="detail-item">
       <div class="detail-label">Fecha de Emisión</div>
       <div class="detail-value"><strong>{{ bono.fechaEmision | date:'dd/MM/yyyy' }}</strong></div>
     </div>
-
-    <div class="detail-column">
-      <div class="detail-label">Frecuencia de Pago</div>
-      <div class="detail-value"><strong>{{ bono.frecuenciaPagoTexto }} ({{ bono.frecuenciaPagoAnual }} veces/año)</strong></div>
-
-      <div class="detail-label">Prima de Redención</div>
-      <div class="detail-value"><strong>{{ bono.primaRedencionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
-
-      <div class="detail-label">Tasa Cupón</div>
-      <div class="detail-value"><strong>{{ bono.tasaDeInteresAnualParaCalculo * 100 | number:'1.2-2' }}% anual</strong></div>
-
+    <div class="detail-item">
       <div class="detail-label">Fecha de Vencimiento</div>
       <div class="detail-value"><strong>{{ bono.fechaVencimiento | date:'dd/MM/yyyy' }}</strong></div>
+    </div>
 
+    <div class="detail-item">
+      <div class="detail-label">Frecuencia de Pago</div>
+      <div class="detail-value"><strong>{{ bono.frecuenciaPagoTexto }} ({{ bono.frecuenciaPagoAnual || 'N/A' }} veces/año)</strong></div>
+    </div>
+    <div class="detail-item">
       <div class="detail-label">Método de Amortización</div>
-      <div class="detail-value"><strong>(Aún no definido en el bono, se obtendría del Plan de Pago)</strong></div>
+      <div class="detail-value"><strong> Alemán </strong></div>
     </div>
   </div>
 
-  <div class="details-container" style="margin-top: 20px;">
-    <h3>Costos del Emisor</h3>
-    <div class="detail-column">
+  <h3 class="section-title">Costos del Emisor</h3>
+  <div class="details-grid cost-grid">
+    <div class="detail-item">
       <div class="detail-label">Estructuración</div>
       <div class="detail-value"><strong>{{ bono.costosEmisor.estructuracionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+    </div>
+    <div class="detail-item">
       <div class="detail-label">Colocación</div>
       <div class="detail-value"><strong>{{ bono.costosEmisor.colocacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
     </div>
-    <div class="detail-column">
-      <div class="detail-label">Flotación (Emisor)</div>
+    <div class="detail-item">
+      <div class="detail-label">Flotación</div>
       <div class="detail-value"><strong>{{ bono.costosEmisor.flotacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
-      <div class="detail-label">CAVALI (Emisor)</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">CAVALI</div>
       <div class="detail-value"><strong>{{ bono.costosEmisor.cavaliPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
     </div>
   </div>
 
-  <div class="details-container" style="margin-top: 20px;">
-    <h3>Costos del Bonista</h3>
-    <div class="detail-column">
-      <div class="detail-label">Flotación (Bonista)</div>
+  <h3 class="section-title">Costos del Bonista</h3>
+  <div class="details-grid cost-grid">
+    <div class="detail-item">
+      <div class="detail-label">Flotación</div>
       <div class="detail-value"><strong>{{ bono.costosBonista.flotacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
-      <div class="detail-label">CAVALI (Bonista)</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">CAVALI</div>
       <div class="detail-value"><strong>{{ bono.costosBonista.cavaliPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
     </div>
   </div>
+</div>
+
+<h2 class="section-title" style="margin-top: 40px;">Flujo de Caja - Método Alemán</h2>
+<p class="bond-description">Detalle del flujo de caja del bono con amortización constante</p>
+
+<div *ngIf="bono && bondCashFlows && bondCashFlows.length > 0" class="cash-flow-table-container">
+  <table>
+    <thead>
+    <tr>
+      <th>Periodo</th>
+      <th>Fecha</th>
+      <th>Amortización</th>
+      <th>Interés</th>
+      <th>Cuota</th>
+      <th>Flujo de Caja</th>
+      <th>Saldo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let flow of bondCashFlows">
+      <td>{{ flow.periodo }}</td>
+      <td>{{ flow.fecha | date:'dd/MM/yyyy' }}</td>
+      <td>{{ flow.amortizacion === '-' ? '-' : (bono.moneda + ' ' + (flow.amortizacion | number:'1.2-2')) }}</td>
+      <td>{{ flow.interes === '-' ? '-' : (bono.moneda + ' ' + (flow.interes | number:'1.2-2')) }}</td>
+      <td>{{ flow.cuota === '-' ? '-' : (bono.moneda + ' ' + (flow.cuota | number:'1.2-2')) }}</td>
+      <td [class.negative-flow]="flow.flujoCaja < 0" [class.positive-flow]="flow.flujoCaja > 0">
+        {{ bono.moneda }} {{ flow.flujoCaja | number:'1.2-2' }}
+      </td>
+      <td>{{ flow.saldo === '-' ? '-' : (bono.moneda + ' ' + (flow.saldo | number:'1.2-2')) }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="bono && (!bondCashFlows || bondCashFlows.length === 0)">
+  <p class="loading-message">No se pudo generar el flujo de caja o no hay datos. Verifique la consola para errores.</p>
 </div>

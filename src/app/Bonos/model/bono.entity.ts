@@ -22,15 +22,15 @@ export interface CostosBonista {
 export class BonoEntity {
   id?: number;
   nombre: string;
+  descripcion: string;
   moneda: string;
   valorNominal: number;
-  valorComercial: number;
   tasaDeInteresAnualParaCalculo: number;
-  fechaEmision: string;
-  fechaVencimiento: string;
+  fechaEmision: any;
+  fechaVencimiento: any;
+  plazoEnAnios: number;
   frecuenciaPagoTexto: string;
   frecuenciaPagoAnual: number;
-  primaRedencionPorcentaje: number;
 
   costosEmisor: CostosEmisor;
   costosBonista: CostosBonista;
@@ -38,15 +38,15 @@ export class BonoEntity {
   constructor() {
     this.id = undefined; // O null, si prefieres
     this.nombre = '';
+    this.descripcion = '';
     this.moneda = '';
     this.valorNominal = 0;
-    this.valorComercial = 0;
     this.tasaDeInteresAnualParaCalculo = 0;
     this.fechaEmision = '';
     this.fechaVencimiento = '';
+    this.plazoEnAnios = 0;
     this.frecuenciaPagoTexto = '';
     this.frecuenciaPagoAnual = 0;
-    this.primaRedencionPorcentaje = 0;
 
     // Inicializa los objetos anidados también
     this.costosEmisor = {

@@ -8,7 +8,26 @@
 </mat-button-toggle-group>
 
 <div class="contenido-seccion">
-  <app-informacion-general *ngIf="seccionActiva === 'general'" (avanzarSeccion)="cambiarSeccion($event)"></app-informacion-general>
-  <app-datos-financieros *ngIf="seccionActiva === 'financieros'" (avanzarSeccion)="cambiarSeccion($event)" (retrocederSeccion)="cambiarSeccion($event)"></app-datos-financieros>
-  <app-datos-adicionales *ngIf="seccionActiva === 'adicionales'" (retrocederSeccion)="cambiarSeccion($event)"></app-datos-adicionales>
+  <app-informacion-general
+    *ngIf="seccionActiva === 'general'"
+    [bono]="nuevoBono"
+    (bonoUpdated)="onInformacionGeneralUpdated($event)"
+    (avanzarSeccion)="cambiarSeccion($event)"
+  ></app-informacion-general>
+
+  <app-datos-financieros
+    *ngIf="seccionActiva === 'financieros'"
+    [bono]="nuevoBono"
+    (bonoUpdated)="onDatosFinancierosUpdated($event)"
+    (avanzarSeccion)="cambiarSeccion($event)"
+    (retrocederSeccion)="cambiarSeccion($event)"
+  ></app-datos-financieros>
+
+  <app-datos-adicionales
+    *ngIf="seccionActiva === 'adicionales'"
+    [bono]="nuevoBono"
+    (bonoUpdated)="onDatosAdicionalesUpdated($event)"
+    (retrocederSeccion)="cambiarSeccion($event)"
+    (guardarBono)="guardarBono()"
+  ></app-datos-adicionales>
 </div>

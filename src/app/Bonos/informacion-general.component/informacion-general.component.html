@@ -6,7 +6,7 @@
     <h2>Nombre del Bono</h2>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Ej: Bono Corporativo INTERBANK</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="bono.nombre" (ngModelChange)="onFieldChange()">
     </mat-form-field>
   </div>
 
@@ -14,32 +14,35 @@
     <h2>Descripción</h2>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Descripción breve del bono</mat-label>
-      <textarea matInput rows="3"></textarea>
+      <textarea matInput rows="3" [(ngModel)]="bono.descripcion" (ngModelChange)="onFieldChange()"></textarea>
     </mat-form-field>
   </div>
 
-  <div class="form-section">
-    <h3>Valor Nominal</h3>
-    <mat-form-field appearance="outline" class="amount-field">
-      <input matInput type="number" value="1000.00">
-      <span matPrefix>$&nbsp;</span>
-    </mat-form-field>
-  </div>
+
 
   <div class="form-row">
 
     <div class="form-section">
+
+      <div class="form-section">
+        <h3>Valor Nominal</h3>
+        <mat-form-field appearance="outline" class="amount-field">
+          <input matInput type="number" [(ngModel)]="bono.valorNominal" (ngModelChange)="onFieldChange()">
+          <span matPrefix>{{ bono.moneda === 'PEN' ? 'S/.&nbsp;' : 'USD&nbsp;'}}</span>
+        </mat-form-field>
+      </div>
+
       <h3>Moneda</h3>
-      <mat-radio-group>
-        <mat-radio-button value="usd" class="radio-option">Dólares (USD)</mat-radio-button>
-        <mat-radio-button value="otros" class="radio-option">Soles (S/.)</mat-radio-button>
+      <mat-radio-group [(ngModel)]="bono.moneda" (ngModelChange)="onFieldChange()">
+        <mat-radio-button value="USD" class="radio-option">Dólares (USD)</mat-radio-button>
+        <mat-radio-button value="PEN" class="radio-option">Soles (S/.)</mat-radio-button>
       </mat-radio-group>
     </div>
   </div>
 
   <div class="button-row">
-      <button mat-raised-button class="cancel-button" [routerLink]="'/dashboard'">Cancelar</button>
-      <button mat-raised-button (click)="avanzarSeccion.emit('financieros')" class="siguiente-button">Siguiente</button>
+    <button mat-raised-button class="cancel-button" [routerLink]="'/dashboard'">Cancelar</button>
+    <button mat-raised-button (click)="onAdvanceSection()" class="siguiente-button">Siguiente</button>
   </div>
 
 </div>

@@ -31,7 +31,7 @@ export class BonoApiService { // Cambiado el nombre a BonoApiService para seguir
    * @param id El ID del bono.
    * @returns Un Observable que emite el BonoEntity encontrado.
    */
-  getBonoById(id: number): Observable<BonoEntity> {
+  getBonoById(id: number | string): Observable<BonoEntity> {
     return this.http.get<BonoEntity>(`${this.apiUrl}/bonos/${id}`);
   }
 

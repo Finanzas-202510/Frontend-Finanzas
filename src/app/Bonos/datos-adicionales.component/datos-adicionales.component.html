@@ -3,51 +3,64 @@
   <p class="subtitle">Complete la información adicional del bono</p>
 
   <div class="form-section">
-    <h2>Estructuración (%)</h2>
+    <h2>Costos del Emisor</h2>
 
     <div class="input-row">
       <mat-form-field appearance="outline" class="percentage-input">
-        <input matInput type="number" value="0.75">
+        <mat-label>Estructuración (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosEmisor.estructuracionPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
       </mat-form-field>
-      <span class="input-label">Fotación (%)</span>
-    </div>
-
-    <div class="input-row">
       <mat-form-field appearance="outline" class="percentage-input">
-        <input matInput type="number" value="0.50">
+        <mat-label>Colocación (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosEmisor.colocacionPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
       </mat-form-field>
-      <span class="input-label">Incluir Período de Gracia</span>
-    </div>
-
-    <h2>Colocación (%)</h2>
-
-    <div class="input-row">
-      <mat-form-field appearance="outline" class="percentage-input">
-        <input matInput type="number" value="0.30">
-      </mat-form-field>
-      <span class="input-label">Interbank (%)</span>
     </div>
 
     <div class="input-row">
       <mat-form-field appearance="outline" class="percentage-input">
-        <input matInput type="number" value="0.50">
+        <mat-label>Flotación (Emisor) (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosEmisor.flotacionPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="percentage-input">
+        <mat-label>CAVALI (Emisor) (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosEmisor.cavaliPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
       </mat-form-field>
     </div>
 
-    <h3>Tipo de Período de Gracia</h3>
-    <mat-radio-group class="radio-group">
-      <mat-radio-button value="parcial" class="radio-option">Parcial</mat-radio-button>
-      <mat-radio-button value="total" class="radio-option">Total</mat-radio-button>
-    </mat-radio-group>
+    <h2>Costos del Bonista</h2>
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <mat-label>Flotación (Bonista) (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosBonista.flotacionPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="percentage-input">
+        <mat-label>CAVALI (Bonista) (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="bono.costosBonista.cavaliPorcentaje" (ngModelChange)="onFieldChange()" step="0.0001">
+        <span matSuffix>%</span>
+      </mat-form-field>
+    </div>
 
-    <h3>Fotación (%)</h3>
-    <mat-form-field appearance="outline" class="full-width">
-      <input matInput type="number">
-    </mat-form-field>
+    <div class="form-section">
+      <mat-checkbox [(ngModel)]="incluirPeriodoGracia">Incluir Período de Gracia</mat-checkbox>
+    </div>
+    <div *ngIf="incluirPeriodoGracia" class="form-section">
+      <h3>Tipo de Período de Gracia</h3>
+      <mat-radio-group [(ngModel)]="tipoPeriodoGracia" class="radio-group">
+        <mat-radio-button value="parcial" class="radio-option">Parcial</mat-radio-button>
+        <mat-radio-button value="total" class="radio-option">Total</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+
   </div>
 
   <div class="button-row">
-    <button mat-raised-button class="cancel-button" (click)="retrocederSeccion.emit('financieros')">Anterior</button>
-    <button mat-raised-button class="siguiente-button">Guardar Bono</button>
+    <button mat-raised-button class="cancel-button" (click)="onBackSection()">Anterior</button>
+    <button mat-raised-button class="siguiente-button" (click)="onSaveBono()">Guardar Bono</button>
   </div>
 </div>
