@@ -50,7 +50,7 @@ export class BonoApiService { // Cambiado el nombre a BonoApiService para seguir
    * @param bono Los datos actualizados del bono.
    * @returns Un Observable que emite el BonoEntity actualizado.
    */
-  updateBono(id: number, bono: BonoEntity): Observable<BonoEntity> {
+  updateBono(id: string, bono: BonoEntity): Observable<BonoEntity> {
     return this.http.put<BonoEntity>(`${this.apiUrl}/bonos/${id}`, bono); // Usamos PUT para reemplazar el recurso completo
   }
 

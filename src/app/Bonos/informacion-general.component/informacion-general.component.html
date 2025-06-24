@@ -26,8 +26,14 @@
 
       <div class="form-section">
         <h3>Valor Nominal</h3>
+        <h3>Valor Nominal</h3>
         <mat-form-field appearance="outline" class="amount-field">
-          <input matInput type="number" [(ngModel)]="bono.valorNominal" (ngModelChange)="onFieldChange()">
+          <mat-label>Seleccione Valor Nominal</mat-label>
+          <mat-select [(ngModel)]="bono.valorNominal" (ngModelChange)="onFieldChange()">
+            <mat-option *ngFor="let valor of valoresNominalesDisponibles" [value]="valor">
+              {{ bono.moneda === 'PEN' ? 'S/. ' : 'USD '}}{{ valor | number:'1.0-0' }}
+            </mat-option>
+          </mat-select>
           <span matPrefix>{{ bono.moneda === 'PEN' ? 'S/.&nbsp;' : 'USD&nbsp;'}}</span>
         </mat-form-field>
       </div>

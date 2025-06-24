@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { NgIf} from '@angular/common';
 
 import { BonoEntity} from '../model/bono.entity';
 
@@ -32,7 +33,8 @@ import { BonoEntity} from '../model/bono.entity';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    CommonModule
+    CommonModule,
+    NgIf
   ],
   providers: [
     provideNativeDateAdapter() // Proveedor del adaptador de fechas
@@ -46,12 +48,29 @@ export class DatosFinancierosComponent {
   @Output() retrocederSeccion = new EventEmitter<string>();
   @Output() bonoUpdated = new EventEmitter<Partial<BonoEntity>>(); // Emite cambios en esta sección
 
+  plazosDisponibles: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   frecuenciaPagoOptions = [
     { value: 'Semestral', annualValue: 2 },
     { value: 'Anual', annualValue: 1 },
-    { value: 'Trimestral', annualValue: 4 },
-    { value: 'Mensual', annualValue: 12 } // Puedes añadir más si es necesario
   ];
+
+  ngOnInit(): void {
+    // Inicializar el plazo si no tiene un valor válido
+    if (!this.bono.plazoEnAnios || !this.plazosDisponibles.includes(this.bono.plazoEnAnios)) {
+      this.bono.plazoEnAnios = this.plazosDisponibles[0]; // Establece el primer valor (2 años) como predeterminado
+    }
+    // ¡NUEVO: Forzar la frecuencia de pago a Semestral al inicio!
+    this.bono.frecuenciaPagoTexto = 'Semestral';
+    this.bono.frecuenciaPagoAnual = 2; // Para Semestral
+
+    // Asegúrate de que fechaEmision se inicialice si es necesario para evitar errores de fecha
+    if (!this.bono.fechaEmision) {
+      this.bono.fechaEmision = new Date(); // O la fecha que consideres por defecto
+    }
+
+    this.onFieldChange(); // Emite los cambios iniciales
+  }
 
   onFieldChange(): void {
     // Al seleccionar una frecuencia, actualiza frecuenciaPagoAnual
@@ -63,16 +82,37 @@ export class DatosFinancierosComponent {
     this.bonoUpdated.emit({
       tasaDeInteresAnualParaCalculo: this.bono.tasaDeInteresAnualParaCalculo,
       fechaEmision: this.bono.fechaEmision,
-      fechaVencimiento: this.bono.fechaVencimiento,
       frecuenciaPagoTexto: this.bono.frecuenciaPagoTexto,
       frecuenciaPagoAnual: this.bono.frecuenciaPagoAnual,
+      plazoEnAnios: this.bono.plazoEnAnios
     });
+  }
+
+  isFormValid(): boolean {
+    // Comprueba que los campos obligatorios y con restricciones estén válidos
+    const tasaValida = this.bono.tasaDeInteresAnualParaCalculo !== null &&
+      this.bono.tasaDeInteresAnualParaCalculo >= 0 &&
+      this.bono.tasaDeInteresAnualParaCalculo <= 20; // Rango de la tasa
+
+    const plazoValido = this.bono.plazoEnAnios !== null &&
+      this.bono.plazoEnAnios >= 2 &&
+      this.bono.plazoEnAnios <= 10; // Rango del plazo
+
+    const fechaValida = !!this.bono.fechaEmision; // Asegura que la fecha esté seleccionada
+
+    // La frecuencia de pago ya está restringida a 'Semestral' por la lógica que haremos.
+
+    return tasaValida && plazoValido && fechaValida;
   }
 
   onAdvanceSection(): void {
     this.onFieldChange(); // Asegúrate de emitir los últimos cambios antes de avanzar
-    this.avanzarSeccion.emit('adicionales');
-  }
+    if (this.isFormValid()) {
+      this.avanzarSeccion.emit('adicionales');
+    } else {
+      alert('Por favor, complete y corrija todos los campos financieros antes de continuar.');
+    }
+    }
 
   onBackSection(): void {
     this.onFieldChange(); // Asegúrate de emitir los últimos cambios antes de retroceder

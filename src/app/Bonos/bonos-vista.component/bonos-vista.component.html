@@ -32,7 +32,7 @@
     </div>
     <div class="detail-item">
       <div class="detail-label">Tasa Cupón (TEA)</div>
-      <div class="detail-value"><strong>{{ bono.tasaDeInteresAnualParaCalculo * 100 | number:'1.2-2'}}% anual</strong></div>
+      <div class="detail-value"><strong>{{ bono.tasaDeInteresAnualParaCalculo | number:'1.2-2'}}% anual</strong></div>
     </div>
 
     <div class="detail-item">
@@ -52,25 +52,73 @@
       <div class="detail-label">Método de Amortización</div>
       <div class="detail-value"><strong> Alemán </strong></div>
     </div>
+
+    <div class="detail-item">
+      <div class="detail-label">Plazo</div>
+      <div class="detail-value"><strong>{{ bono.plazoEnAnios }} años</strong></div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Resultados Clave</h3>
+  <div class="details-grid cost-grid">
+    <div class="detail-item">
+      <div class="detail-label">TCEA (Emisor)</div>
+      <div class="detail-value">
+        <strong>
+          <ng-container *ngIf="tcea !== null; else tceaNotAvailable">
+            {{ tcea | number:'1.4-4' }}%
+          </ng-container>
+          <ng-template #tceaNotAvailable>
+            N/A
+          </ng-template>
+        </strong>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">TREA (Bonista)</div>
+      <div class="detail-value">
+        <strong>
+          <ng-container *ngIf="trea !== null; else treaNotAvailable">
+            {{ trea | number:'1.4-4' }}%
+          </ng-container>
+          <ng-template #treaNotAvailable>
+            N/A
+          </ng-template>
+        </strong>
+      </div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">TEP ({{ bono.frecuenciaPagoTexto || 'Periódica' }})</div>
+      <div class="detail-value">
+        <strong>
+          <ng-container *ngIf="tep !== null; else tepNotAvailable">
+            {{ tep | number:'1.4-4' }}%
+          </ng-container>
+          <ng-template #tepNotAvailable>
+            N/A
+          </ng-template>
+        </strong>
+      </div>
+    </div>
   </div>
 
   <h3 class="section-title">Costos del Emisor</h3>
   <div class="details-grid cost-grid">
     <div class="detail-item">
       <div class="detail-label">Estructuración</div>
-      <div class="detail-value"><strong>{{ bono.costosEmisor.estructuracionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosEmisor.estructuracionPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
     <div class="detail-item">
       <div class="detail-label">Colocación</div>
-      <div class="detail-value"><strong>{{ bono.costosEmisor.colocacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosEmisor.colocacionPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
     <div class="detail-item">
       <div class="detail-label">Flotación</div>
-      <div class="detail-value"><strong>{{ bono.costosEmisor.flotacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosEmisor.flotacionPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
     <div class="detail-item">
       <div class="detail-label">CAVALI</div>
-      <div class="detail-value"><strong>{{ bono.costosEmisor.cavaliPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosEmisor.cavaliPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
   </div>
 
@@ -78,11 +126,11 @@
   <div class="details-grid cost-grid">
     <div class="detail-item">
       <div class="detail-label">Flotación</div>
-      <div class="detail-value"><strong>{{ bono.costosBonista.flotacionPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosBonista.flotacionPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
     <div class="detail-item">
       <div class="detail-label">CAVALI</div>
-      <div class="detail-value"><strong>{{ bono.costosBonista.cavaliPorcentaje * 100 | number:'1.2-2' }}%</strong></div>
+      <div class="detail-value"><strong>{{ bono.costosBonista.cavaliPorcentaje | number:'1.2-2' }}%</strong></div>
     </div>
   </div>
 </div>
@@ -96,17 +144,19 @@
     <tr>
       <th>Periodo</th>
       <th>Fecha</th>
+      <th>Saldo Inicial</th>
       <th>Amortización</th>
       <th>Interés</th>
       <th>Cuota</th>
       <th>Flujo de Caja</th>
-      <th>Saldo</th>
+      <th>Saldo Final</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let flow of bondCashFlows">
       <td>{{ flow.periodo }}</td>
       <td>{{ flow.fecha | date:'dd/MM/yyyy' }}</td>
+      <td>{{ flow.saldoInicial === '-' ? '-' : (bono.moneda + ' ' + (flow.saldoInicial | number:'1.2-2')) }}</td>
       <td>{{ flow.amortizacion === '-' ? '-' : (bono.moneda + ' ' + (flow.amortizacion | number:'1.2-2')) }}</td>
       <td>{{ flow.interes === '-' ? '-' : (bono.moneda + ' ' + (flow.interes | number:'1.2-2')) }}</td>
       <td>{{ flow.cuota === '-' ? '-' : (bono.moneda + ' ' + (flow.cuota | number:'1.2-2')) }}</td>

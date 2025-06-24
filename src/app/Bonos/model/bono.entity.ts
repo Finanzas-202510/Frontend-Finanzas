@@ -1,63 +1,64 @@
-/**
- * Interface para los costos específicos del emisor.
- */
-export interface CostosEmisor {
-  estructuracionPorcentaje: number;
-  colocacionPorcentaje: number;
-  flotacionPorcentaje: number;
-  cavaliPorcentaje: number;
+// src/app/model/bono.entity.ts
+
+export class CostosEmisor {
+  estructuracionPorcentaje: number = 0;
+  colocacionPorcentaje: number = 0;
+  flotacionPorcentaje: number = 0;
+  cavaliPorcentaje: number = 0;
+
+  constructor(data?: Partial<CostosEmisor>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 }
 
-/**
- * Interface para los costos específicos del bonista (inversionista).
- */
-export interface CostosBonista {
-  flotacionPorcentaje: number;
-  cavaliPorcentaje: number;
+export class CostosBonista {
+  flotacionPorcentaje: number = 0;
+  cavaliPorcentaje: number = 0;
+
+  constructor(data?: Partial<CostosBonista>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 }
 
-/**
- * Clase que representa la estructura de un Bono, con valores por defecto.
- */
 export class BonoEntity {
-  id?: number;
-  nombre: string;
-  descripcion: string;
-  moneda: string;
-  valorNominal: number;
-  tasaDeInteresAnualParaCalculo: number;
-  fechaEmision: any;
-  fechaVencimiento: any;
-  plazoEnAnios: number;
-  frecuenciaPagoTexto: string;
-  frecuenciaPagoAnual: number;
+  id?: number | string;
+  nombre: string = '';
+  descripcion: string = '';
+  moneda: string = 'USD';
+  valorNominal: number = 0;
+  tasaDeInteresAnualParaCalculo: number = 0;
+  fechaEmision: any = null; // <= VUELVE A ANY y null como inicialización
+  fechaVencimiento: any = null; // <= VUELVE A ANY y null como inicialización
+  plazoEnAnios: number = 0;
+  frecuenciaPagoTexto: string = 'Semestral';
+  frecuenciaPagoAnual: number = 2;
 
-  costosEmisor: CostosEmisor;
-  costosBonista: CostosBonista;
+  costosEmisor: CostosEmisor = new CostosEmisor();
+  costosBonista: CostosBonista = new CostosBonista();
 
-  constructor() {
-    this.id = undefined; // O null, si prefieres
-    this.nombre = '';
-    this.descripcion = '';
-    this.moneda = '';
-    this.valorNominal = 0;
-    this.tasaDeInteresAnualParaCalculo = 0;
-    this.fechaEmision = '';
-    this.fechaVencimiento = '';
-    this.plazoEnAnios = 0;
-    this.frecuenciaPagoTexto = '';
-    this.frecuenciaPagoAnual = 0;
+  // Para el periodo de gracia, si va a ser parte del modelo del bono
+  incluirPeriodoGracia: boolean = false;
+  tipoPeriodoGracia: string = 'parcial';
 
-    // Inicializa los objetos anidados también
-    this.costosEmisor = {
-      estructuracionPorcentaje: 0,
-      colocacionPorcentaje: 0,
-      flotacionPorcentaje: 0,
-      cavaliPorcentaje: 0
-    };
-    this.costosBonista = {
-      flotacionPorcentaje: 0,
-      cavaliPorcentaje: 0
-    };
+  constructor(data?: Partial<BonoEntity>) {
+    if (data) {
+      Object.assign(this, data);
+
+      // Manejar los objetos anidados de forma especial
+      if (data.costosEmisor) {
+        this.costosEmisor = new CostosEmisor(data.costosEmisor);
+      }
+      if (data.costosBonista) {
+        this.costosBonista = new CostosBonista(data.costosBonista);
+      }
+
+      // OMITIR LA LÓGICA DE CONVERSIÓN DE FECHAS A Date (si antes era string)
+      // Ya que hemos vuelto a 'any', asumimos que el tipo se manejará externamente
+      // Por ejemplo, si mat-datepicker maneja strings o si el backend espera un formato específico.
+    }
   }
 }

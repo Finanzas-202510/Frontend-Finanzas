@@ -1,0 +1,93 @@
+/* Estilos generales para el contenedor principal */
+:host {
+  display: block;
+  padding: 0 24px; /* Margen izquierdo y derecho */
+}
+
+/* Estilo para el título h1 */
+h1 {
+  margin: 24px 0 16px 0; /* Arriba | Derecha | Abajo | Izquierda */
+  font-size: 24px;
+  font-weight: 800;
+  color: #000000;
+}
+
+/* Estilo para el párrafo descriptivo */
+.Description-new {
+  margin: 0 0 24px 0; /* Arriba | Derecha | Abajo | Izquierda */
+  color: #616161;
+  font-size: 18px;
+}
+
+/* Estilo para el contenedor de contenido */
+.contenido-seccion {
+  margin: 0 0 10px 0;  /*Arriba | Derecha | Abajo | Izquierda */
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.Description-new {
+  color: #616161;
+}
+/* Contenedor principal - agrega margen */
+.mat-button-toggle-container {
+  margin: 0 50px; /* Ajusta este valor según necesites */
+}
+
+/* Eliminar el checkmark (icono de selección) */
+.mat-button-toggle-checked .mat-button-toggle-label-content::after {
+  content: none !important;
+}
+
+/* Estilo para el grupo de botones */
+mat-button-toggle-group {
+  width: 100%; /* Resta el doble del margen que pusiste */
+  margin: 0 0 24px 0;
+  border: none;
+  box-shadow: none;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Estilo para cada botón toggle */
+mat-button-toggle {
+  flex: 1;
+  text-align: center;
+  padding: 2px 0;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  border: none !important;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+/* Estilo para el botón activo */
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-weight: 600;
+}
+
+/* Eliminar bordes por defecto */
+.mat-button-toggle-standalone,
+.mat-button-toggle-group {
+  border: none !important;
+}
+
+/* Espaciado interno del texto */
+.mat-button-toggle-label-content {
+  padding: 0 16px;
+  line-height: 1.5;
+}
+
+/* Separación sutil entre botones */
+mat-button-toggle + mat-button-toggle {
+  margin-left: 8px;
+}

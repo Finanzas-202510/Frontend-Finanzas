@@ -1,0 +1,45 @@
+<div class="header-section">
+  <h1>Editar Bono</h1>
+</div>
+
+<hr />
+
+<div *ngIf="loading" class="loading-message">
+  <p>Cargando bono para edición...</p>
+</div>
+
+<div *ngIf="error" class="error-message">
+  <p>{{ error }}</p>
+</div>
+
+<div *ngIf="bono && !loading && !error" class="edit-bond-container">
+  <p class="Description-new">Modifique los campos necesarios del bono corporativo existente.</p> <mat-button-toggle-group [(ngModel)]="seccionActiva" name="seccionActivaGroup"> <mat-button-toggle value="general">Información General</mat-button-toggle>
+  <mat-button-toggle value="financieros">Datos Financieros</mat-button-toggle>
+  <mat-button-toggle value="adicionales">Datos Adicionales</mat-button-toggle>
+</mat-button-toggle-group>
+
+  <div class="contenido-seccion">
+    <app-informacion-general
+      *ngIf="seccionActiva === 'general'"
+      [bono]="bono"
+      (avanzarSeccion)="cambiarSeccion($event)"
+    ></app-informacion-general>
+
+    <app-datos-financieros
+      *ngIf="seccionActiva === 'financieros'"
+      [bono]="bono"
+      (avanzarSeccion)="cambiarSeccion($event)"
+      (retrocederSeccion)="cambiarSeccion($event)"
+    ></app-datos-financieros>
+
+    <app-datos-adicionales
+      *ngIf="seccionActiva === 'adicionales'"
+      [bono]="bono"
+      (retrocederSeccion)="cambiarSeccion($event)"
+      (guardarBono)="saveBono()" ></app-datos-adicionales>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</div>

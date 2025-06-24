@@ -1,100 +1,54 @@
 {
   "bonos": [
     {
-      "id": "1",
-      "nombre": "cbn",
-      "descripcion": "fgdh",
-      "moneda": "USD",
-      "valorNominal": 4454,
-      "tasaDeInteresAnualParaCalculo": 0,
-      "fechaEmision": "2025-06-20",
-      "fechaVencimiento": "2029-06-20",
-      "plazoEnAnios": 4,
-      "frecuenciaPagoTexto": "Anual",
-      "frecuenciaPagoAnual": 0,
-      "primaRedencionPorcentaje": 0,
-      "costosEmisor": {
-        "estructuracionPorcentaje": 0,
-        "colocacionPorcentaje": 0,
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
-      },
-      "costosBonista": {
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
-      }
-    },
-    {
-      "id": "73fe",
-      "nombre": "fdgs",
-      "descripcion": "dfsgh",
+      "id": "e584",
+      "nombre": "Bono Prueba",
+      "descripcion": "Bono previo a presentarlo en clase",
       "moneda": "PEN",
-      "valorNominal": 345,
-      "tasaDeInteresAnualParaCalculo": 0,
-      "fechaEmision": "2025-06-18",
-      "fechaVencimiento": "2025-06-18",
-      "plazoEnAnios": 0,
+      "valorNominal": 4000,
+      "tasaDeInteresAnualParaCalculo": 2.5,
+      "fechaEmision": "2025-06-24",
+      "fechaVencimiento": "2029-06-24",
+      "plazoEnAnios": 4,
       "frecuenciaPagoTexto": "Semestral",
       "frecuenciaPagoAnual": 2,
-      "primaRedencionPorcentaje": 0,
       "costosEmisor": {
-        "estructuracionPorcentaje": 0,
-        "colocacionPorcentaje": 0,
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
+        "estructuracionPorcentaje": 0.5,
+        "colocacionPorcentaje": 0.4,
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.1
       },
       "costosBonista": {
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
-      }
-    },
-    {
-      "id": "c9d0",
-      "nombre": "cghvnb",
-      "descripcion": "dfgh",
-      "moneda": "USD",
-      "valorNominal": 45363,
-      "tasaDeInteresAnualParaCalculo": 0,
-      "fechaEmision": "2025-06-20",
-      "fechaVencimiento": "2028-06-20",
-      "plazoEnAnios": 3,
-      "frecuenciaPagoTexto": "Trimestral",
-      "frecuenciaPagoAnual": 4,
-      "primaRedencionPorcentaje": 0,
-      "costosEmisor": {
-        "estructuracionPorcentaje": 0,
-        "colocacionPorcentaje": 0,
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
+        "flotacionPorcentaje": 0.5,
+        "cavaliPorcentaje": 0.09
       },
-      "costosBonista": {
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
-      }
+      "incluirPeriodoGracia": false,
+      "tipoPeriodoGracia": "parcial"
     },
     {
-      "id": "7ea8",
-      "nombre": "dfgh",
-      "descripcion": "dfgh",
+      "id": "c508",
+      "nombre": "Bono UPC",
+      "descripcion": "Bono obtenido por la universidad UPC",
       "moneda": "USD",
-      "valorNominal": 343453,
-      "tasaDeInteresAnualParaCalculo": 0.6,
-      "fechaEmision": "2025-06-18",
-      "fechaVencimiento": "2030-06-18",
+      "valorNominal": 3000,
+      "tasaDeInteresAnualParaCalculo": 9.9,
+      "fechaEmision": "2025-06-24",
+      "fechaVencimiento": "2031-06-24",
       "plazoEnAnios": 5,
-      "frecuenciaPagoTexto": "Anual",
-      "frecuenciaPagoAnual": 1,
-      "primaRedencionPorcentaje": 0,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
       "costosEmisor": {
-        "estructuracionPorcentaje": 0,
-        "colocacionPorcentaje": 0,
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
+        "estructuracionPorcentaje": 0.2,
+        "colocacionPorcentaje": 0.4,
+        "flotacionPorcentaje": 0.1,
+        "cavaliPorcentaje": 0.085
       },
       "costosBonista": {
-        "flotacionPorcentaje": 0,
-        "cavaliPorcentaje": 0
-      }
+        "flotacionPorcentaje": 0.25,
+        "cavaliPorcentaje": 0.045
+      },
+      "incluirPeriodoGracia": false,
+      "tipoPeriodoGracia": "parcial"
     }
   ],
   "planesDePago": []

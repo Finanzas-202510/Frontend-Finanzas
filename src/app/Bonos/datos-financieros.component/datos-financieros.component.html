@@ -7,8 +7,15 @@
       <h2>Tasa Cupón (% anual)</h2>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Tasa Efectiva Anual (TEA)</mat-label>
-        <input matInput type="number" [(ngModel)]="bono.tasaDeInteresAnualParaCalculo" (ngModelChange)="onFieldChange()" step="0.0001">
-        <span matSuffix>%</span> </mat-form-field>
+        <input matInput type="number"
+               [(ngModel)]="bono.tasaDeInteresAnualParaCalculo"
+               (ngModelChange)="onFieldChange()"
+               step="0.0001"
+               min="0"  max="20" #tasaCuponInput="ngModel" required> <span matSuffix>%</span>
+        <mat-error *ngIf="tasaCuponInput.hasError('required') && tasaCuponInput.touched">La tasa cupón es obligatoria.</mat-error>
+        <mat-error *ngIf="tasaCuponInput.hasError('min') && tasaCuponInput.touched">La tasa cupón no puede ser negativa.</mat-error>
+        <mat-error *ngIf="tasaCuponInput.hasError('max') && tasaCuponInput.touched">La tasa cupón no debe exceder el 20%.</mat-error>
+      </mat-form-field>
 
       <h3>Fecha de Emisión</h3>
       <mat-form-field appearance="outline" class="full-width">
@@ -20,9 +27,10 @@
 
       <h3>Frecuencia de Pago</h3>
       <mat-form-field appearance="outline" class="full-width">
-        <mat-select [(ngModel)]="bono.frecuenciaPagoTexto" (ngModelChange)="onFieldChange()">
-          <mat-option *ngFor="let freq of frecuenciaPagoOptions" [value]="freq.value">{{ freq.value }}</mat-option>
+        <mat-select [(ngModel)]="bono.frecuenciaPagoTexto" (ngModelChange)="onFieldChange()" required #frecuenciaPagoInput="ngModel">
+          <mat-option [value]="'Semestral'">Semestral</mat-option>
         </mat-select>
+        <mat-error *ngIf="frecuenciaPagoInput.hasError('required') && frecuenciaPagoInput.touched">La frecuencia de pago es obligatoria.</mat-error>
       </mat-form-field>
 
     </div>
@@ -31,8 +39,11 @@
 
       <h3>Plazo del Bono (Años)</h3>
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Ej: 3 (años)</mat-label>
-        <input matInput type="number" [(ngModel)]="bono.plazoEnAnios" (ngModelChange)="onFieldChange()">
+        <mat-label>Seleccione el Plazo</mat-label>
+        <mat-select [(ngModel)]="bono.plazoEnAnios" (ngModelChange)="onFieldChange()" required #plazoAniosInput="ngModel">
+          <mat-option *ngFor="let plazo of plazosDisponibles" [value]="plazo">{{ plazo }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="plazoAniosInput.hasError('required') && plazoAniosInput.touched">El plazo es obligatorio.</mat-error>
       </mat-form-field>
 
     </div>
