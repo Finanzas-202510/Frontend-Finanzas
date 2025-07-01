@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DashboardComponent} from './dashboard.component/dashboard.component';
+import {Router, RouterOutlet} from '@angular/router';
 import { ToolbarComponent} from './Shared/toolbar.component/toolbar.component';
+import {NgIf} from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,
+  imports: [
+    RouterOutlet,
     ToolbarComponent,
+    NgIf,
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected title = 'Frontend-Finanzas';
+  constructor(public router: Router) {}
 }

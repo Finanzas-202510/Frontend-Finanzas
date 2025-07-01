@@ -1,4 +1,13 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "Juan",
+      "lastname": "Prueba",
+      "email": "juanprueba@gmail.com",
+      "password": "juan123"
+    }
+  ],
   "bonos": [
     {
       "id": "e584",

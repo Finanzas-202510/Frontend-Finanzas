@@ -1,0 +1,38 @@
+<div class="login-background">
+  <div class="login-box">
+    <h1 class="brand-title">BondFlow</h1>
+    <p class="subtitle">Sistema de Valoración de Bonos Corporativos</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2 class="form-title">Iniciar Sesión</h2>
+      <p class="form-subtitle">Ingrese sus credenciales para acceder al sistema</p>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput type="email" placeholder="Ingrese su email" formControlName="email" />
+
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput type="password" placeholder="Ingrese su contraseña" formControlName="password" />
+
+      </mat-form-field>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <button mat-flat-button color="primary" class="full-width" type="submit">
+        Iniciar Sesión
+      </button>
+    </form>
+
+    <p class="register-text">
+      ¿No tienes una cuenta? <a href="#">Regístrate</a>
+    </p>
+  </div>
+</div>
