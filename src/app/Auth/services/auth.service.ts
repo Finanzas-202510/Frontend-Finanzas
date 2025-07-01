@@ -26,5 +26,11 @@ export class AuthService {
     const userJson = localStorage.getItem('user');
     return userJson ? JSON.parse(userJson) : null;
   }
+  logout(): void {
+    localStorage.removeItem('user');
+  }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('user');
+  }
 }

@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
-import {MatButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {MatToolbar} from "@angular/material/toolbar";
-import {MatIcon} from '@angular/material/icon';
-import {RouterLink} from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink, Router} from '@angular/router';
 import {AuthService} from '../../Auth/services/auth.service';
 import {NgIf} from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
   imports: [
-    MatButton,
-    MatIcon,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
     MatToolbar,
     RouterLink,
     NgIf,
@@ -23,7 +25,7 @@ export class ToolbarComponent {
   userName = '';
   businessName = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     const user = this.authService.getCurrentUser();
@@ -31,5 +33,10 @@ export class ToolbarComponent {
       this.userName = user.name;
       this.businessName = user.businessName;
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
