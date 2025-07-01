@@ -1,0 +1,59 @@
+<div class="register-background">
+  <div class="register-box">
+    <h1 class="brand-title">BondFlow</h1>
+    <p class="subtitle">Sistema de Valoración de Bonos Corporativos</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <h2 class="form-title">Crear Cuenta</h2>
+      <p class="form-subtitle">Regístrese para acceder al sistema de valoración de bonos</p>
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="lastname" />
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de la Empresa</mat-label>
+          <mat-icon matPrefix>business</mat-icon>
+          <input matInput formControlName="businessName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo Electrónico</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirmar Contraseña</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="confirmPassword" />
+        </mat-form-field>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <button mat-flat-button color="primary" class="full-width" type="submit" >
+        Crear Usuario
+      </button>
+    </form>
+    <p class="login-text">
+      ¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </div>
+</div>
+
