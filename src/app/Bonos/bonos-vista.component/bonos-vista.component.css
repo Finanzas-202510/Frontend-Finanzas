@@ -233,3 +233,45 @@ table td {
   color: #5cb85c; /* Verde */
   font-weight: bold;
 }
+
+.gracia-info-section {
+  background-color: #f0f8ff; /* Un color suave para destacar la sección */
+  border: 1px solid #cceeff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.gracia-info-section h3 {
+  color: #3f51b5; /* Color primario de Material */
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.gracia-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.gracia-item:last-child {
+  border-bottom: none;
+}
+
+.gracia-item .label {
+  font-weight: 500;
+  color: #555;
+}
+
+.gracia-item .value {
+  color: #333;
+}
+
+.no-gracia-message {
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  padding: 10px;
+}

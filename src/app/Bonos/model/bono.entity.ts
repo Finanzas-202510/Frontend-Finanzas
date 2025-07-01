@@ -7,9 +7,10 @@ export class CostosEmisor {
   cavaliPorcentaje: number = 0;
 
   constructor(data?: Partial<CostosEmisor>) {
-    if (data) {
-      Object.assign(this, data);
-    }
+    this.estructuracionPorcentaje = data?.estructuracionPorcentaje ?? 0;
+    this.colocacionPorcentaje = data?.colocacionPorcentaje ?? 0;
+    this.flotacionPorcentaje = data?.flotacionPorcentaje ?? 0;
+    this.cavaliPorcentaje = data?.cavaliPorcentaje ?? 0;
   }
 }
 
@@ -18,9 +19,8 @@ export class CostosBonista {
   cavaliPorcentaje: number = 0;
 
   constructor(data?: Partial<CostosBonista>) {
-    if (data) {
-      Object.assign(this, data);
-    }
+    this.flotacionPorcentaje = data?.flotacionPorcentaje ?? 0;
+    this.cavaliPorcentaje = data?.cavaliPorcentaje ?? 0;
   }
 }
 
@@ -40,25 +40,28 @@ export class BonoEntity {
   costosEmisor: CostosEmisor = new CostosEmisor();
   costosBonista: CostosBonista = new CostosBonista();
 
-  // Para el periodo de gracia, si va a ser parte del modelo del bono
-  incluirPeriodoGracia: boolean = false;
-  tipoPeriodoGracia: string = 'parcial';
+  incluirPeriodoGracia: boolean;
+  tipoPeriodoGracia: 'parcial' | 'total' | ''; // 'parcial', 'total' o '' (ninguno)
+  periodoGraciaMeses: number;
 
   constructor(data?: Partial<BonoEntity>) {
-    if (data) {
-      Object.assign(this, data);
+    this.id = data?.id || '';
+    this.nombre = data?.nombre || '';
+    this.descripcion = data?.descripcion || '';
+    this.valorNominal = data?.valorNominal ?? 0;
+    this.moneda = data?.moneda || 'USD';
+    this.tasaDeInteresAnualParaCalculo = data?.tasaDeInteresAnualParaCalculo ?? 0;
+    this.fechaEmision = data?.fechaEmision ? new Date(data.fechaEmision) : new Date();
+    this.fechaVencimiento = data?.fechaVencimiento ? new Date(data.fechaVencimiento) : new Date();
+    this.frecuenciaPagoTexto = data?.frecuenciaPagoTexto || 'Semestral';
+    this.frecuenciaPagoAnual = data?.frecuenciaPagoAnual ?? 2;
+    this.plazoEnAnios = data?.plazoEnAnios ?? 0;
+    this.costosEmisor = new CostosEmisor(data?.costosEmisor);
+    this.costosBonista = new CostosBonista(data?.costosBonista);
 
-      // Manejar los objetos anidados de forma especial
-      if (data.costosEmisor) {
-        this.costosEmisor = new CostosEmisor(data.costosEmisor);
-      }
-      if (data.costosBonista) {
-        this.costosBonista = new CostosBonista(data.costosBonista);
-      }
-
-      // OMITIR LA LÓGICA DE CONVERSIÓN DE FECHAS A Date (si antes era string)
-      // Ya que hemos vuelto a 'any', asumimos que el tipo se manejará externamente
-      // Por ejemplo, si mat-datepicker maneja strings o si el backend espera un formato específico.
+    // Inicializar nuevas propiedades de gracia
+    this.incluirPeriodoGracia = data?.incluirPeriodoGracia ?? false;
+    this.tipoPeriodoGracia = data?.tipoPeriodoGracia || '';
+    this.periodoGraciaMeses = data?.periodoGraciaMeses ?? 0;
     }
-  }
 }

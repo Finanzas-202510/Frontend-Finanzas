@@ -10,6 +10,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox'; // Para mat-chec
 
 
 import { BonoEntity, CostosEmisor, CostosBonista} from '../model/bono.entity';
+import {MatSelectModule} from '@angular/material/select';
+import {MatOption} from '@angular/material/core';
 
 @Component({
   selector: 'app-datos-adicionales',
@@ -24,7 +26,10 @@ import { BonoEntity, CostosEmisor, CostosBonista} from '../model/bono.entity';
     CommonModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    NgIf
+    NgIf,
+    MatSelectModule, // Añadir MatSelectModule
+    MatOption
+
   ],
   templateUrl: './datos-adicionales.component.html',
   styleUrl: './datos-adicionales.component.css'
@@ -48,6 +53,8 @@ export class DatosAdicionalesComponent {
   readonly MAX_FLOTACION_BONISTA = 0.5;
   readonly MAX_CAVALI_BONISTA = 0.1;
 
+  periodosGraciaDisponibles: number[] = [1,2,3,4];
+
   ngOnInit(): void {
     // Inicializar los objetos de costos si son undefined para evitar errores de acceso a propiedades anidadas
     if (!this.bono.costosEmisor) {
@@ -63,6 +70,26 @@ export class DatosAdicionalesComponent {
     this.bono.costosEmisor.cavaliPorcentaje = this.bono.costosEmisor.cavaliPorcentaje ?? 0;
     this.bono.costosBonista.flotacionPorcentaje = this.bono.costosBonista.flotacionPorcentaje ?? 0;
     this.bono.costosBonista.cavaliPorcentaje = this.bono.costosBonista.cavaliPorcentaje ?? 0;
+
+    // Inicializar el array de periodos de gracia disponibles
+    this.generatePeriodosGraciaOptions();
+    // Asegurarse de que los valores de gracia estén inicializados
+    this.bono.incluirPeriodoGracia = this.bono.incluirPeriodoGracia ?? false;
+    this.bono.tipoPeriodoGracia = this.bono.tipoPeriodoGracia || '';
+    this.bono.periodoGraciaMeses = this.bono.periodoGraciaMeses ?? 0;
+  }
+
+  generatePeriodosGraciaOptions(): void {
+    if (this.bono.plazoEnAnios && this.bono.frecuenciaPagoAnual) {
+      const totalPeriodos = this.bono.plazoEnAnios * this.bono.frecuenciaPagoAnual;
+      this.periodosGraciaDisponibles = Array.from({length: totalPeriodos}, (_, i) => i + 1);
+    } else {
+      this.periodosGraciaDisponibles = [];
+    }
+    // Si el periodo de gracia seleccionado excede el nuevo total, resetéalo
+    if (this.bono.periodoGraciaMeses > this.periodosGraciaDisponibles.length) {
+      this.bono.periodoGraciaMeses = 0;
+    }
   }
 
   onFieldChange(): void {
@@ -77,11 +104,22 @@ export class DatosAdicionalesComponent {
       costosBonista: {
         flotacionPorcentaje: this.bono.costosBonista.flotacionPorcentaje, // Corregido el typo aquí
         cavaliPorcentaje: this.bono.costosBonista.cavaliPorcentaje
-      }
-      // Si el periodo de gracia se guarda en el bono, deberías emitirlo también
-      // incluirPeriodoGracia: this.incluirPeriodoGracia,
-      // tipoPeriodoGracia: this.tipoPeriodoGracia
+      },
+      // NUEVAS PROPIEDADES DE GRACIA PARA EMITIR
+      incluirPeriodoGracia: this.bono.incluirPeriodoGracia,
+      tipoPeriodoGracia: this.bono.tipoPeriodoGracia,
+      periodoGraciaMeses: this.bono.periodoGraciaMeses
     });
+  }
+
+  // Este método se llamará cuando cambie el checkbox de "incluir periodo de gracia"
+  onTogglePeriodoGracia(): void {
+    if (!this.bono.incluirPeriodoGracia) {
+      // Si se desactiva, resetear el tipo y la duración de la gracia
+      this.bono.tipoPeriodoGracia = '';
+      this.bono.periodoGraciaMeses = 0;
+    }
+    this.onFieldChange(); // Emite los cambios
   }
 
   // Método para validar el formulario completo
@@ -106,7 +144,13 @@ export class DatosAdicionalesComponent {
       isValidPercentage(costosBonista?.flotacionPorcentaje, this.MAX_FLOTACION_BONISTA) &&
       isValidPercentage(costosBonista?.cavaliPorcentaje, this.MAX_CAVALI_BONISTA);
 
-    return emisorValido && bonistaValido;
+    // Validar periodo de gracia si está incluido
+    let graciaValida = true;
+    if (this.bono.incluirPeriodoGracia) {
+      graciaValida = this.bono.tipoPeriodoGracia !== '' && this.bono.periodoGraciaMeses > 0;
+    }
+
+    return emisorValido && bonistaValido && graciaValida;
   }
 
   onSaveBono(): void {
@@ -116,9 +160,6 @@ export class DatosAdicionalesComponent {
       this.guardarBono.emit();
     } else {
       alert('Por favor, complete y corrija todos los campos de costos antes de guardar el bono.');
-      // Aquí podrías agregar lógica para "tocar" todos los campos
-      // para que los mensajes de error se muestren al usuario.
-      // Ejemplo: this.markAllAsTouched(this.bono.costosEmisor);
     }
   }
 

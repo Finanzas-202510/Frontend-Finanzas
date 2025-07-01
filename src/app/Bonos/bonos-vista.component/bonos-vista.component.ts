@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'; // Importa NavigationEnd
 import { filter } from 'rxjs/operators'; // Importa filter de rxjs/operators
@@ -30,7 +30,7 @@ interface CashFlowItem {
   styleUrl: './bonos-vista.component.css',
   providers: [DatePipe, DecimalPipe]
 })
-export class BonosVistaComponent implements OnInit {
+export class BonosVistaComponent implements OnInit, OnDestroy {
   bono: BonoEntity | undefined;
   loading: boolean = true;
   error: string | null = null;
@@ -67,7 +67,6 @@ export class BonosVistaComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // Es CRUCIAL desuscribirse para evitar fugas de memoria
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
     }
@@ -119,6 +118,7 @@ export class BonosVistaComponent implements OnInit {
       this.error = "Datos del bono no disponibles para generar el flujo de caja.";
       return;
     }
+    console.log('generateCashFlow llamado. Plazo en años:', this.bono.plazoEnAnios, 'Frecuencia:', this.bono.frecuenciaPagoAnual); // Añade esto
 
     const vn = this.bono.valorNominal;
     const tea = this.bono.tasaDeInteresAnualParaCalculo;
@@ -158,7 +158,7 @@ export class BonosVistaComponent implements OnInit {
       return;
     }
 
-    const tepCalculated = Math.pow(1 + tea, (1 / freqPagoAnual)) - 1;
+    const tepCalculated = ((Math.pow(1 + tea/100, (1 / freqPagoAnual))) - 1);
     this.tep = tepCalculated;
 
     const amortizacionConstante = vn / n;
@@ -176,22 +176,59 @@ export class BonosVistaComponent implements OnInit {
       flujoCaja: 0,
       saldo: vn,
     });
+// Lógica para el período de gracia
+    const incluirGracia = this.bono.incluirPeriodoGracia;
+    const tipoGracia = this.bono.tipoPeriodoGracia;
+    const duracionGraciaPeriodos = this.bono.periodoGraciaMeses; // Ya está en número de periodos de pago
 
     for (let i = 1; i <= n; i++) {
-      const interes = currentSaldo * tepCalculated;
-      const cuota = interes + amortizacionConstante;
+      let amortizacion = 0;
+      let interes = 0;
+      let cuota = 0;
+      let flujoCaja = 0;
+
+      interes = currentSaldo * tepCalculated;
+
+      if (incluirGracia && i <= duracionGraciaPeriodos) {
+        // Estamos en un período de gracia
+        if (tipoGracia === 'parcial') {
+          // Gracia Parcial: Solo se pagan intereses
+          amortizacion = 0;
+          cuota = interes;
+          flujoCaja = cuota; // Flujo de caja es la cuota pagada
+        } else if (tipoGracia === 'total') {
+          // Gracia Total: No se paga nada, intereses se capitalizan
+          amortizacion = 0;
+          interes = currentSaldo * tepCalculated; // Calcular interés para capitalizarlo
+          cuota = 0; // No hay pago
+          flujoCaja = 0; // No hay flujo de caja saliente
+          currentSaldo += interes; // Capitalizar intereses
+        }
+      } else {
+        // Período normal (después de la gracia o si no hay gracia)
+        const amortizacionConstante = (currentSaldo / (n - (i - 1))); // Recalcular amortización constante para el saldo restante
+        amortizacion = amortizacionConstante;
+        cuota = interes + amortizacion;
+        flujoCaja = cuota;
+      }
 
       const paymentDate = new Date(fechaEmision);
       const monthsPerPaymentPeriod = 12 / freqPagoAnual;
       paymentDate.setMonth(fechaEmision.getMonth() + (monthsPerPaymentPeriod * i));
       if (paymentDate.getDate() !== fechaEmision.getDate()) {
-        paymentDate.setDate(0); // Set to last day of previous month
-        paymentDate.setDate(fechaEmision.getDate()); // Set to original day, will overflow if needed
+        const originalDay = fechaEmision.getDate();
+        const lastDayOfPaymentMonth = new Date(paymentDate.getFullYear(), paymentDate.getMonth() + 1, 0).getDate();
+        paymentDate.setDate(Math.min(originalDay, lastDayOfPaymentMonth));
       }
 
-      currentSaldo -= amortizacionConstante;
-      if (i === n) {
-        currentSaldo = 0; // Asegura que el saldo final sea 0 en la última cuota
+      // El saldo se reduce por la amortización solo en periodos de pago normal o gracia parcial (amortización es 0)
+      if (tipoGracia !== 'total' || i > duracionGraciaPeriodos) {
+        currentSaldo -= amortizacion;
+      }
+
+      // Asegurar que el saldo final sea 0 en la última cuota si es un periodo normal
+      if (i === n && (tipoGracia !== 'total' || i > duracionGraciaPeriodos)) {
+        currentSaldo = 0;
       }
 
       cashFlows.push({

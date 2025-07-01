@@ -66,7 +66,7 @@
       <div class="detail-value">
         <strong>
           <ng-container *ngIf="tcea !== null; else tceaNotAvailable">
-            {{ tcea | number:'1.4-4' }}%
+            {{ tcea*100 | number:'1.4-4' }}%
           </ng-container>
           <ng-template #tceaNotAvailable>
             N/A
@@ -79,7 +79,7 @@
       <div class="detail-value">
         <strong>
           <ng-container *ngIf="trea !== null; else treaNotAvailable">
-            {{ trea | number:'1.4-4' }}%
+            {{ trea*100 | number:'1.4-4' }}%
           </ng-container>
           <ng-template #treaNotAvailable>
             N/A
@@ -92,7 +92,7 @@
       <div class="detail-value">
         <strong>
           <ng-container *ngIf="tep !== null; else tepNotAvailable">
-            {{ tep | number:'1.4-4' }}%
+            {{ tep*100 | number:'1.4-4' }}%
           </ng-container>
           <ng-template #tepNotAvailable>
             N/A
@@ -100,6 +100,25 @@
         </strong>
       </div>
     </div>
+  </div>
+
+  <div class="gracia-info-section">
+    <h3>Información de Periodo de Gracia</h3>
+    <div *ngIf="bono.incluirPeriodoGracia; else noGracia">
+      <div class="gracia-item">
+        <span class="label">Tipo de Gracia</span>
+        <span class="value">
+            {{ bono.tipoPeriodoGracia === 'parcial' ? 'Parcial (Sólo Intereses)' : 'Total (Ni Capital ni Intereses)' }}
+          </span>
+      </div>
+      <div class="gracia-item">
+        <span class="label">Duración de Gracia</span>
+        <span class="value">{{ bono.periodoGraciaMeses }} Periodo<span *ngIf="bono.periodoGraciaMeses !== 1">s</span></span>
+      </div>
+    </div>
+    <ng-template #noGracia>
+      <p class="no-gracia-message">No se ha configurado un periodo de gracia para este bono.</p>
+    </ng-template>
   </div>
 
   <h3 class="section-title">Costos del Emisor</h3>

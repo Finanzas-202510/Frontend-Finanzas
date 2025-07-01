@@ -100,14 +100,32 @@
     </div>
 
     <div class="form-section">
-      <mat-checkbox [(ngModel)]="incluirPeriodoGracia">Incluir Período de Gracia</mat-checkbox>
-    </div>
-    <div *ngIf="incluirPeriodoGracia" class="form-section">
-      <h3>Tipo de Período de Gracia</h3>
-      <mat-radio-group [(ngModel)]="tipoPeriodoGracia" class="radio-group">
-        <mat-radio-button value="parcial" class="radio-option">Parcial</mat-radio-button>
-        <mat-radio-button value="total" class="radio-option">Total</mat-radio-button>
-      </mat-radio-group>
+      <h3>Periodo de Gracia</h3>
+      <mat-checkbox [(ngModel)]="bono.incluirPeriodoGracia" name="incluirPeriodoGracia"
+                    (change)="onTogglePeriodoGracia()">
+        Incluir Periodo de Gracia
+      </mat-checkbox>
+
+      <div *ngIf="bono.incluirPeriodoGracia" class="gracia-options">
+        <mat-radio-group [(ngModel)]="bono.tipoPeriodoGracia" name="tipoPeriodoGracia"
+                         (change)="onFieldChange()">
+          <mat-radio-button value="parcial">Gracia Parcial (Solo intereses)</mat-radio-button>
+          <mat-radio-button value="total">Gracia Total (Ni capital ni intereses)</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Duración Gracia (Periodos)</mat-label>
+          <mat-select [(ngModel)]="bono.periodoGraciaMeses" name="periodoGraciaMeses"
+                      (selectionChange)="onFieldChange()" required>
+            <mat-option *ngFor="let p of periodosGraciaDisponibles" [value]="p">
+              {{p}} Periodo<span *ngIf="p !== 1">s</span>
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="periodosGraciaDisponibles.length === 0">
+            Por favor, define el plazo en años y la frecuencia de pago.
+          </mat-hint>
+        </mat-form-field>
+      </div>
     </div>
   </div>
 

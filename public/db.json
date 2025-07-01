@@ -26,29 +26,106 @@
       "tipoPeriodoGracia": "parcial"
     },
     {
-      "id": "c508",
-      "nombre": "Bono UPC",
-      "descripcion": "Bono obtenido por la universidad UPC",
-      "moneda": "USD",
-      "valorNominal": 3000,
-      "tasaDeInteresAnualParaCalculo": 9.9,
-      "fechaEmision": "2025-06-24",
-      "fechaVencimiento": "2031-06-24",
+      "id": "6e7e",
+      "nombre": "pruebita",
+      "descripcion": "Descripcion",
+      "moneda": "PEN",
+      "valorNominal": 4000,
+      "tasaDeInteresAnualParaCalculo": 3.2,
+      "fechaEmision": "2025-06-26T00:00:00.000Z",
+      "fechaVencimiento": "2031-06-26T00:00:00.000Z",
+      "plazoEnAnios": 6,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.5,
+        "colocacionPorcentaje": 0.9,
+        "flotacionPorcentaje": 0.15,
+        "cavaliPorcentaje": 0.1
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.26,
+        "cavaliPorcentaje": 0.08
+      },
+      "incluirPeriodoGracia": false,
+      "tipoPeriodoGracia": "parcial"
+    },
+    {
+      "id": "46a2",
+      "nombre": "UPc",
+      "descripcion": "bono upc",
+      "moneda": "PEN",
+      "valorNominal": 5000,
+      "tasaDeInteresAnualParaCalculo": 12.5,
+      "fechaEmision": "2025-06-24T00:00:00.000Z",
+      "fechaVencimiento": "2030-06-24T00:00:00.000Z",
       "plazoEnAnios": 5,
       "frecuenciaPagoTexto": "Semestral",
       "frecuenciaPagoAnual": 2,
       "costosEmisor": {
-        "estructuracionPorcentaje": 0.2,
-        "colocacionPorcentaje": 0.4,
-        "flotacionPorcentaje": 0.1,
-        "cavaliPorcentaje": 0.085
+        "estructuracionPorcentaje": 0.5,
+        "colocacionPorcentaje": 0.8,
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.05
       },
       "costosBonista": {
-        "flotacionPorcentaje": 0.25,
-        "cavaliPorcentaje": 0.045
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.05
       },
       "incluirPeriodoGracia": false,
       "tipoPeriodoGracia": "parcial"
+    },
+    {
+      "id": "8e57",
+      "nombre": "IOT Prueba",
+      "descripcion": "preuba para periodo de gracia",
+      "moneda": "USD",
+      "valorNominal": 2000,
+      "tasaDeInteresAnualParaCalculo": 8.5,
+      "fechaEmision": "2025-07-01",
+      "fechaVencimiento": "2031-07-01",
+      "plazoEnAnios": 6,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.5,
+        "colocacionPorcentaje": 0.2,
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.05
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.05
+      },
+      "incluirPeriodoGracia": true,
+      "tipoPeriodoGracia": "parcial",
+      "periodoGraciaMeses": 2
+    },
+    {
+      "id": "4267",
+      "nombre": "Plazo de gracia total",
+      "descripcion": "prueba de plazos de gracia total",
+      "moneda": "USD",
+      "valorNominal": 2000,
+      "tasaDeInteresAnualParaCalculo": 8.5,
+      "fechaEmision": "2025-07-01",
+      "fechaVencimiento": "2029-07-01",
+      "plazoEnAnios": 4,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.45,
+        "colocacionPorcentaje": 0.2,
+        "flotacionPorcentaje": 0.18,
+        "cavaliPorcentaje": 0.05
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.18,
+        "cavaliPorcentaje": 0.05
+      },
+      "incluirPeriodoGracia": true,
+      "tipoPeriodoGracia": "total",
+      "periodoGraciaMeses": 4
     }
   ],
   "planesDePago": []
