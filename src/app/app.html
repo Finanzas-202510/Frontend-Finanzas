@@ -1,2 +1,2 @@
-<app-toolbar></app-toolbar>
+<app-toolbar *ngIf="router.url !== '/' && router.url !== '/login' && router.url !== '/register'"></app-toolbar>
 <router-outlet></router-outlet>
