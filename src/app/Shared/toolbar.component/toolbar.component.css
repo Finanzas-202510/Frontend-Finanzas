@@ -3,7 +3,12 @@
   color: #006644;
   font-weight: bold;
 }
-
+.username{
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+  margin-right: 15px;
+}
 .spacer {
   flex: 1 1 auto;
 }
@@ -19,3 +24,4 @@ mat-toolbar button:hover {
 mat-icon{
   color: black !important;
 }
+

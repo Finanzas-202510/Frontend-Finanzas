@@ -7,5 +7,6 @@
     <button mat-button routerLink="/configuracion">Configuración</button>
   </nav>
   <span class="spacer"></span>
+  <span *ngIf="userName" class="username">Bienvenido, {{ userName }} | {{ businessName }}</span>
   <mat-icon>account_circle</mat-icon>
 </mat-toolbar>
