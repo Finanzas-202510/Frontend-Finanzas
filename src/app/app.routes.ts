@@ -4,10 +4,12 @@ import { NuevoBonoComponent} from './Bonos/nuevo-bono.component/nuevo-bono.compo
 import { BonosVistaComponent } from './Bonos/bonos-vista.component/bonos-vista.component';
 import { BonoEditarComponent} from './Bonos/bonos-editar.component/bonos-editar.component';
 import {LoginComponent} from './Auth/pages/login.component/login.component';
+import {RegisterComponent} from './Auth/pages/register.component/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path:'login', component: LoginComponent},
+  { path:'register', component: RegisterComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'nuevo-bono', component: NuevoBonoComponent },
   { path: 'vista-bono/:id', component: BonosVistaComponent },

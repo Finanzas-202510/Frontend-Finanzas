@@ -4,8 +4,17 @@
       "id": 1,
       "name": "Juan",
       "lastname": "Prueba",
+      "businessName": "Empresa SAC",
       "email": "juanprueba@gmail.com",
       "password": "juan123"
+    },
+    {
+      "id": "61a4",
+      "name": "Jesus",
+      "lastname": "Miranda",
+      "businessName": "Coreal",
+      "email": "jesusprueba@gmail.com",
+      "password": "jesus123"
     }
   ],
   "bonos": [
