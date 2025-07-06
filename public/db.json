@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Juan",
       "lastname": "Prueba",
       "businessName": "Empresa SAC",
@@ -144,6 +144,84 @@
       "incluirPeriodoGracia": true,
       "tipoPeriodoGracia": "total",
       "periodoGraciaMeses": 4
+    },
+    {
+      "id": "aed5",
+      "nombre": "Prueba",
+      "descripcion": "Prueba sin periodo de gracia",
+      "moneda": "USD",
+      "valorNominal": 4000,
+      "tasaDeInteresAnualParaCalculo": 12,
+      "fechaEmision": "2025-07-08",
+      "fechaVencimiento": "2033-07-08",
+      "plazoEnAnios": 8,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.2,
+        "colocacionPorcentaje": 0.2,
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.015
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 0.2,
+        "cavaliPorcentaje": 0.015
+      },
+      "incluirPeriodoGracia": false,
+      "tipoPeriodoGracia": "",
+      "periodoGraciaMeses": 0
+    },
+    {
+      "id": "f25b",
+      "nombre": "Prueba con nuevos costos",
+      "descripcion": "Priueba en el aula",
+      "moneda": "PEN",
+      "valorNominal": 1000,
+      "tasaDeInteresAnualParaCalculo": 14,
+      "fechaEmision": "2025-07-04T00:00:00.000Z",
+      "fechaVencimiento": "2031-07-04T00:00:00.000Z",
+      "plazoEnAnios": 6,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.1,
+        "colocacionPorcentaje": 0.15,
+        "cavaliPorcentaje": 0.0525
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 1,
+        "cavaliPorcentaje": 0.0525
+      },
+      "incluirPeriodoGracia": true,
+      "tipoPeriodoGracia": "parcial",
+      "periodoGraciaMeses": 2,
+      "cok": 0.08
+    },
+    {
+      "id": "45b9",
+      "nombre": "Ejemplo profesor",
+      "descripcion": "Si",
+      "moneda": "USD",
+      "valorNominal": 1000,
+      "tasaDeInteresAnualParaCalculo": 6,
+      "fechaEmision": "2025-07-05",
+      "fechaVencimiento": "2030-07-05",
+      "plazoEnAnios": 5,
+      "frecuenciaPagoTexto": "Semestral",
+      "frecuenciaPagoAnual": 2,
+      "costosEmisor": {
+        "estructuracionPorcentaje": 0.1,
+        "colocacionPorcentaje": 0.15,
+        "cavaliPorcentaje": 0.0525
+      },
+      "costosBonista": {
+        "flotacionPorcentaje": 1,
+        "cavaliPorcentaje": 0.0525
+      },
+      "incluirPeriodoGracia": false,
+      "tipoPeriodoGracia": "",
+      "periodoGraciaMeses": 0,
+      "cok": 0.08
     }
   ],
   "planesDePago": []

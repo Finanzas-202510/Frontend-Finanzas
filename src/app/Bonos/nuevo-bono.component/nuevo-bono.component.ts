@@ -61,7 +61,6 @@ export class NuevoBonoComponent implements OnInit{
         ...this.nuevoBono.costosEmisor, // Mantener los costos existentes si no se sobrescriben
         estructuracionPorcentaje: data.costosEmisor?.estructuracionPorcentaje ?? 0,
         colocacionPorcentaje: data.costosEmisor?.colocacionPorcentaje ?? 0,
-        flotacionPorcentaje: data.costosEmisor?.flotacionPorcentaje ?? 0, // Aquí iría flotacion Emisor
         cavaliPorcentaje: data.costosEmisor?.cavaliPorcentaje ?? 0 // Aquí iría cavali Emisor
       },
       costosBonista: {

@@ -1,259 +1,242 @@
-/* Estilos globales y reseteo básico */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f8f8; /* Fondo ligero similar al de la imagen */
-  color: #333;
-}
 
-/* Contenedor principal de la vista */
 .bond-details-layout {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  padding: 20px 30px; /* Ajuste para dar más espacio horizontal */
-  max-width: 900px; /* Ancho máximo similar al de la imagen */
+  border: 2px solid ; /* ¡ESTA ES LA LÍNEA CRÍTICA Y CORRECTA! */
+  margin: 2rem auto; /* Centrado horizontal y margen superior/inferior para separarlo del body */
+  max-width: 960px; /* Ancho máximo */
+  border-radius: 15px;
+  border-color: #777777;
+  min-width: 320px; /* Ancho mínimo para responsividad */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+  z-index: 10;
+  padding: 1.5rem;
 }
 
-/* Sección de encabezado (Título principal y acciones) */
+/* Sección de encabezado (Título principal "Detalles del Bono" y acciones "Volver") */
+/* Ahora que está dentro de .bond-details-layout, no necesita sus propios márgenes de auto,
+   ni padding-left/right, ya que el padding del padre lo maneja. */
 .header-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 15px; /* Espacio antes del HR */
+  padding-bottom: 1.5rem; /* Espacio debajo del encabezado y los botones */
+  /* Eliminadas: padding-left, padding-right, max-width, margin-left, margin-right.
+     El padding y el ancho los hereda del bond-details-layout */
+  margin-top: 0; /* Asegura que no haya un margen superior extra */
 }
 
 .header-section h1 {
-  font-size: 24px; /* Un poco más grande para el título principal */
-  margin: 0; /* Elimina margen predeterminado */
-  color: #333;
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--text-color-dark);
+  font-weight: 600;
 }
 
+/* Estilo para el botón "Volver" */
 .actions button {
-  background-color: #f0f0f0; /* Fondo gris claro para los botones */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px 15px;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  font-size: 14px;
-  color: #555;
-  transition: background-color 0.2s, border-color 0.2s;
-  margin-left: 10px; /* Espacio entre botones */
+  font-size: 0.9rem;
+  color: #495057;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.075);
 }
 
 .actions button:hover {
-  background-color: #e0e0e0;
-  border-color: #bbb;
+  background-color: #e9ecef;
+  border-color: #b0b8c2;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
-/* Línea divisoria */
-hr {
-  border: none;
-  height: 1px;
-  background-color: #eee; /* Color más claro para la línea */
-  margin: 20px 0;
+.actions button mat-icon {
+  font-size: 1.2rem;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 
 /* Mensajes de carga y error */
+/* Estos estilos deben ir fuera del bond-details-layout si los mensajes están fuera del div principal */
 .loading-message,
 .error-message {
   text-align: center;
-  margin-top: 20px;
-  font-size: 16px;
-  color: #666;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--secondary-gray);
+  max-width: 960px; /* Para que se centren de forma similar al bond-details-layout */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem; /* Un poco de padding para que no se vea pegado */
 }
 
 .error-message {
-  color: #d9534f; /* Rojo para errores */
+  color: #dc3545;
+  font-weight: bold;
 }
 
-/* Título del bono y descripción */
+/* Título y descripción del bono dentro del .bond-details-layout */
 .bond-header {
-  margin-bottom: 25px; /* Espacio después del encabezado del bono */
+  margin-bottom: 1.5rem;
 }
 
 .bond-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 5px; /* Menos espacio entre título y descripción */
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  margin-bottom: 0.5rem;
 }
 
 .bond-description {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 0; /* Elimina margen inferior */
+  font-size: 0.9rem;
+  color: var(--secondary-gray);
+  line-height: 1.5;
+}
+
+/* Contenedores de grupos de detalles - info-card (las "sub-tarjetas") */
+.info-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--box-shadow-light);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color-subcard);
+  display: block;
+  box-sizing: border-box;
 }
 
 /* Estilo para las secciones de detalles (main, costos emisor, costos bonista) */
 .details-grid {
   display: grid;
-  /* Configura 3 columnas para la sección principal y 2 para costos */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 40px; /* Espacio vertical y horizontal entre items */
-  margin-bottom: 30px; /* Espacio después de cada grid de detalles */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem 2.5rem;
 }
 
-/* Ajuste para las secciones de costos que tienen menos columnas */
 .cost-grid {
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas para costos */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-/* Estilo de cada item de detalle (label y value) */
 .detail-item {
-  /* Alinea el label y el valor */
   display: flex;
   flex-direction: column;
 }
 
 .detail-label {
-  font-size: 13px; /* Más pequeño para el label */
-  color: #888; /* Gris claro para el label */
-  margin-bottom: 3px; /* Espacio entre label y value */
-  white-space: nowrap; /* Evita que el label se rompa en varias líneas */
+  font-size: 0.85rem;
+  color: var(--secondary-gray);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 .detail-value {
-  font-size: 16px; /* Tamaño normal para el valor */
-  color: #333;
-  font-weight: normal; /* Asegura que el valor no sea bold por defecto si no lo deseas */
+  font-size: 1.1rem;
+  color: var(--text-color-dark);
+  font-weight: 600;
 }
 
-.detail-value strong {
-  font-weight: bold; /* Solo el valor numérico en negrita */
-}
-
-/* Títulos de sección (Costos del Emisor/Bonista) */
+/* Títulos de sección (dentro de los info-card) */
 .section-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px; /* Espacio antes del grid de costos */
-  color: #333;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-color-dark);
+  border-bottom: 2px solid var(--primary-green);
+  padding-bottom: 0.5rem;
 }
 
-/* Media queries para responsividad (opcional pero recomendado) */
-@media (max-width: 768px) {
-  .details-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
-    gap: 15px 25px;
-  }
-  .bond-details-layout {
-    margin: 15px;
-    padding: 15px 20px;
-  }
+/* Títulos de sección fuera de info-card, como "Flujo de Caja" */
+h2.section-titles {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-green);
 }
 
-@media (max-width: 480px) {
-  .details-grid,
-  .cost-grid {
-    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
-    gap: 10px;
-  }
-  .header-section {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .actions {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-  .actions button {
-    margin-left: 0;
-    width: calc(33% - 10px); /* Ajusta para 3 botones */
-    padding: 8px 5px; /* Reduce padding para botones más pequeños */
-    font-size: 12px;
-  }
-}
-
-/* Estilos para el título del flujo de caja */
-.section-title {
-  margin-top: 40px; /* Más espacio arriba para separar de la sección anterior */
-  margin-bottom: 10px;
-  font-size: 20px;
-  color: #333;
-}
-
-.bond-description {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 20px;
+.bond-descriptions {
+  font-size: 0.9rem;
+  color: var(--secondary-gray);
+  margin-bottom: 1.5rem;
 }
 
 /* Contenedor de la tabla */
 .cash-flow-table-container {
-  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--box-shadow-light);
+  border: 1px solid var(--border-color-subcard);
+  padding: 1.5rem;
 }
 
-/* Estilos de la tabla */
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
-  white-space: nowrap; /* Evita que el contenido de las celdas se rompa */
+  font-size: 0.85rem;
+  white-space: nowrap;
+  table-layout: fixed;
 }
 
 table thead {
-  background-color: #f0f0f0; /* Fondo gris claro para el encabezado */
+  background-color: var(--light-gray-bg);
 }
 
 table th {
-  padding: 12px 15px;
+  padding: 0.75rem 1rem;
   text-align: left;
-  font-weight: bold;
-  color: #555;
-  border-bottom: 1px solid #ddd;
+  font-weight: 600;
+  color: var(--secondary-gray);
+  border-bottom: 2px solid var(--border-color-subcard);
 }
 
 table tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Rayado para filas impares */
+  background-color: #fcfcfc;
 }
 
 table td {
-  padding: 10px 15px;
-  border-bottom: 1px solid #eee;
-  color: #333;
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: var(--text-color-dark);
 }
 
-/* Estilo para el flujo de caja negativo y positivo */
 .negative-flow {
-  color: #d9534f; /* Rojo */
-  font-weight: bold;
+  color: #dc3545;
+  font-weight: 600;
 }
 
 .positive-flow {
-  color: #5cb85c; /* Verde */
-  font-weight: bold;
+  color: var(--primary-green);
+  font-weight: 600;
 }
 
+/* Información de Gracia - Estilo específico */
 .gracia-info-section {
-  background-color: #f0f8ff; /* Un color suave para destacar la sección */
-  border: 1px solid #cceeff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: #f8fcfb;
+  border: 1px solid #d4edda;
+  margin-top: 2rem;
 }
 
 .gracia-info-section h3 {
-  color: #3f51b5; /* Color primario de Material */
+  color: var(--primary-green-dark);
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .gracia-item {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px dashed #eee;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #e2e6e9;
 }
 
 .gracia-item:last-child {
@@ -262,16 +245,148 @@ table td {
 
 .gracia-item .label {
   font-weight: 500;
-  color: #555;
+  color: var(--secondary-gray);
+  font-size: 0.95rem;
 }
 
 .gracia-item .value {
-  color: #333;
+  color: var(--text-color-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .no-gracia-message {
   font-style: italic;
-  color: #777;
+  color: var(--secondary-gray);
   text-align: center;
-  padding: 10px;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Sección de Análisis de Sensibilidad y Riesgo - Estilo específico */
+.analysis-section {
+  margin-top: 2.5rem;
+}
+
+.analysis-section h2 {
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  border-bottom: 2px solid var(--primary-green);
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.analysis-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--light-gray-bg);
+  border: 1px solid var(--border-color-subcard);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+}
+
+.analysis-item .label {
+  font-weight: 500;
+  color: var(--secondary-gray);
+  margin-bottom: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.analysis-item .value {
+  font-size: 1.15rem;
+  color: var(--text-color-dark);
+  font-weight: 700;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .bond-details-layout {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1rem; /* Ajuste para móviles */
+  }
+  .actions {
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .actions button {
+    margin-left: 0;
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  .details-grid,
+  .cost-grid,
+  .analysis-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem 1.5rem;
+  }
+  .info-card {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .cash-flow-table-container {
+    padding: 1rem;
+  }
+  .cash-flow-table-container table {
+    font-size: 0.85rem;
+  }
+  .cash-flow-table-container th,
+  .cash-flow-table-container td {
+    padding: 0.6rem 0.8rem;
+  }
+  h2.section-titles {
+    margin-top: 2rem;
+  }
+  .loading-message,
+  .error-message {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bond-details-layout {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  .details-grid,
+  .cost-grid,
+  .analysis-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .header-section h1 {
+    font-size: 1.5rem;
+  }
+  .actions button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .cash-flow-table-container table {
+    font-size: 0.8rem;
+  }
+  .cash-flow-table-container th,
+  .cash-flow-table-container td {
+    padding: 0.5rem 0.75rem;
+  }
+  .loading-message,
+  .error-message {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 }

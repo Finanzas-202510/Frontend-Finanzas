@@ -13,12 +13,12 @@
                (ngModelChange)="onFieldChange()"
                step="0.0001"
                min="0"
-               max="0.5"  #estructuracionInput="ngModel"
+               max="0.1"  #estructuracionInput="ngModel"
                required>
         <span matSuffix>%</span>
         <mat-error *ngIf="estructuracionInput.hasError('required') && estructuracionInput.touched">Este campo es obligatorio.</mat-error>
         <mat-error *ngIf="estructuracionInput.hasError('min') && estructuracionInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="estructuracionInput.hasError('max') && estructuracionInput.touched">Máximo 0.5%.</mat-error>
+        <mat-error *ngIf="estructuracionInput.hasError('max') && estructuracionInput.touched">Máximo 0.1%.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="percentage-input">
         <mat-label>Colocación (%)</mat-label>
@@ -27,29 +27,12 @@
                (ngModelChange)="onFieldChange()"
                step="0.0001"
                min="0"
-               max="1"   #colocacionInput="ngModel"
+               max="0.15"   #colocacionInput="ngModel"
                required>
         <span matSuffix>%</span>
         <mat-error *ngIf="colocacionInput.hasError('required') && colocacionInput.touched">Este campo es obligatorio.</mat-error>
         <mat-error *ngIf="colocacionInput.hasError('min') && colocacionInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="colocacionInput.hasError('max') && colocacionInput.touched">Máximo 1%.</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="input-row">
-      <mat-form-field appearance="outline" class="percentage-input">
-        <mat-label>Flotación (Emisor) (%)</mat-label>
-        <input matInput type="number"
-               [(ngModel)]="bono.costosEmisor.flotacionPorcentaje"
-               (ngModelChange)="onFieldChange()"
-               step="0.0001"
-               min="0"
-               max="0.2"  #flotacionEmisorInput="ngModel"
-               required>
-        <span matSuffix>%</span>
-        <mat-error *ngIf="flotacionEmisorInput.hasError('required') && flotacionEmisorInput.touched">Este campo es obligatorio.</mat-error>
-        <mat-error *ngIf="flotacionEmisorInput.hasError('min') && flotacionEmisorInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="flotacionEmisorInput.hasError('max') && flotacionEmisorInput.touched">Máximo 0.2%.</mat-error>
+        <mat-error *ngIf="colocacionInput.hasError('max') && colocacionInput.touched">Máximo 0.15%.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="percentage-input">
         <mat-label>CAVALI (Emisor) (%)</mat-label>
@@ -58,30 +41,30 @@
                (ngModelChange)="onFieldChange()"
                step="0.0001"
                min="0"
-               max="0.1"  #cavaliEmisorInput="ngModel"
+               max="0.0525"  #cavaliEmisorInput="ngModel"
                required>
         <span matSuffix>%</span>
         <mat-error *ngIf="cavaliEmisorInput.hasError('required') && cavaliEmisorInput.touched">Este campo es obligatorio.</mat-error>
         <mat-error *ngIf="cavaliEmisorInput.hasError('min') && cavaliEmisorInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="cavaliEmisorInput.hasError('max') && cavaliEmisorInput.touched">Máximo 0.1%.</mat-error>
+        <mat-error *ngIf="cavaliEmisorInput.hasError('max') && cavaliEmisorInput.touched">Máximo 0.0525%.</mat-error>
       </mat-form-field>
     </div>
 
     <h2>Costos del Bonista</h2>
     <div class="input-row">
       <mat-form-field appearance="outline" class="percentage-input">
-        <mat-label>Flotación (Bonista) (%)</mat-label>
+        <mat-label>SAB (Bonista) (%)</mat-label>
         <input matInput type="number"
                [(ngModel)]="bono.costosBonista.flotacionPorcentaje"
                (ngModelChange)="onFieldChange()"
                step="0.0001"
                min="0"
-               max="0.5"  #flotacionBonistaInput="ngModel"
+               max="1"  #flotacionBonistaInput="ngModel"
                required>
         <span matSuffix>%</span>
         <mat-error *ngIf="flotacionBonistaInput.hasError('required') && flotacionBonistaInput.touched">Este campo es obligatorio.</mat-error>
         <mat-error *ngIf="flotacionBonistaInput.hasError('min') && flotacionBonistaInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="flotacionBonistaInput.hasError('max') && flotacionBonistaInput.touched">Máximo 0.5%.</mat-error>
+        <mat-error *ngIf="flotacionBonistaInput.hasError('max') && flotacionBonistaInput.touched">Máximo 1%.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="percentage-input">
         <mat-label>CAVALI (Bonista) (%)</mat-label>
@@ -90,12 +73,29 @@
                (ngModelChange)="onFieldChange()"
                step="0.0001"
                min="0"
-               max="0.1"  #cavaliBonistaInput="ngModel"
+               max="0.0525"  #cavaliBonistaInput="ngModel"
                required>
         <span matSuffix>%</span>
         <mat-error *ngIf="cavaliBonistaInput.hasError('required') && cavaliBonistaInput.touched">Este campo es obligatorio.</mat-error>
         <mat-error *ngIf="cavaliBonistaInput.hasError('min') && cavaliBonistaInput.touched">El valor no puede ser negativo.</mat-error>
-        <mat-error *ngIf="cavaliBonistaInput.hasError('max') && cavaliBonistaInput.touched">Máximo 0.1%.</mat-error>
+        <mat-error *ngIf="cavaliBonistaInput.hasError('max') && cavaliBonistaInput.touched">Máximo 0.0525%.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="input-row">
+      <mat-form-field appearance="outline" class="percentage-input">
+        <mat-label>COK (%)</mat-label>
+        <input matInput type="number"
+               [(ngModel)]="bono.cok"
+               (ngModelChange)="onFieldChange()"
+               step="0.0001"
+               min="0.03"  #cokInput="ngModel"
+               max="0.20"
+               required>
+        <span matSuffix>%</span>
+        <mat-error *ngIf="cokInput.hasError('required') && cokInput.touched">Este campo es obligatorio.</mat-error>
+        <mat-error *ngIf="cokInput.hasError('min') && cokInput.touched">El COK mínimo es 3%.</mat-error>
+        <mat-error *ngIf="cokInput.hasError('max') && cokInput.touched">El COK máximo es 20%.</mat-error>
       </mat-form-field>
     </div>
 

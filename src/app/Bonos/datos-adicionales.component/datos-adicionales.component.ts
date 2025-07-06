@@ -46,12 +46,11 @@ export class DatosAdicionalesComponent {
   incluirPeriodoGracia: boolean = false;
   tipoPeriodoGracia: string = 'parcial'; // 'parcial' o 'total'
 
-  readonly MAX_ESTRUCTURACION = 0.5;
-  readonly MAX_COLOCACION = 1;
-  readonly MAX_FLOTACION_EMISOR = 0.2;
-  readonly MAX_CAVALI_EMISOR = 0.1;
-  readonly MAX_FLOTACION_BONISTA = 0.5;
-  readonly MAX_CAVALI_BONISTA = 0.1;
+  readonly MAX_ESTRUCTURACION = 0.1;
+  readonly MAX_COLOCACION = 0.15;
+  readonly MAX_CAVALI_EMISOR = 0.0525;
+  readonly MAX_FLOTACION_BONISTA = 1;
+  readonly MAX_CAVALI_BONISTA = 0.0525;
 
   periodosGraciaDisponibles: number[] = [1,2,3,4];
 
@@ -64,12 +63,12 @@ export class DatosAdicionalesComponent {
       this.bono.costosBonista = new CostosBonista();
     }
     // Asegurarse de que los valores numéricos estén inicializados a 0 si son nulos para evitar NaN en inputs
-    this.bono.costosEmisor.estructuracionPorcentaje = this.bono.costosEmisor.estructuracionPorcentaje ?? 0;
-    this.bono.costosEmisor.colocacionPorcentaje = this.bono.costosEmisor.colocacionPorcentaje ?? 0;
-    this.bono.costosEmisor.flotacionPorcentaje = this.bono.costosEmisor.flotacionPorcentaje ?? 0;
-    this.bono.costosEmisor.cavaliPorcentaje = this.bono.costosEmisor.cavaliPorcentaje ?? 0;
-    this.bono.costosBonista.flotacionPorcentaje = this.bono.costosBonista.flotacionPorcentaje ?? 0;
-    this.bono.costosBonista.cavaliPorcentaje = this.bono.costosBonista.cavaliPorcentaje ?? 0;
+    this.bono.costosEmisor.estructuracionPorcentaje = this.MAX_ESTRUCTURACION;
+    this.bono.costosEmisor.colocacionPorcentaje = this.MAX_COLOCACION;
+    this.bono.costosEmisor.cavaliPorcentaje = this.MAX_CAVALI_EMISOR;
+    this.bono.costosBonista.flotacionPorcentaje = this.MAX_FLOTACION_BONISTA;
+    this.bono.costosBonista.cavaliPorcentaje = this.MAX_CAVALI_BONISTA;
+    this.bono.cok = this.bono.cok ?? 0.08;
 
     // Inicializar el array de periodos de gracia disponibles
     this.generatePeriodosGraciaOptions();
@@ -98,7 +97,6 @@ export class DatosAdicionalesComponent {
       costosEmisor: {
         estructuracionPorcentaje: this.bono.costosEmisor.estructuracionPorcentaje,
         colocacionPorcentaje: this.bono.costosEmisor.colocacionPorcentaje,
-        flotacionPorcentaje: this.bono.costosEmisor.flotacionPorcentaje,
         cavaliPorcentaje: this.bono.costosEmisor.cavaliPorcentaje
       },
       costosBonista: {
@@ -108,7 +106,8 @@ export class DatosAdicionalesComponent {
       // NUEVAS PROPIEDADES DE GRACIA PARA EMITIR
       incluirPeriodoGracia: this.bono.incluirPeriodoGracia,
       tipoPeriodoGracia: this.bono.tipoPeriodoGracia,
-      periodoGraciaMeses: this.bono.periodoGraciaMeses
+      periodoGraciaMeses: this.bono.periodoGraciaMeses,
+      cok: this.bono.cok
     });
   }
 
@@ -136,7 +135,6 @@ export class DatosAdicionalesComponent {
     const emisorValido =
       isValidPercentage(costosEmisor?.estructuracionPorcentaje, this.MAX_ESTRUCTURACION) &&
       isValidPercentage(costosEmisor?.colocacionPorcentaje, this.MAX_COLOCACION) &&
-      isValidPercentage(costosEmisor?.flotacionPorcentaje, this.MAX_FLOTACION_EMISOR) &&
       isValidPercentage(costosEmisor?.cavaliPorcentaje, this.MAX_CAVALI_EMISOR);
 
     // Validar costos del bonista
@@ -149,6 +147,10 @@ export class DatosAdicionalesComponent {
     if (this.bono.incluirPeriodoGracia) {
       graciaValida = this.bono.tipoPeriodoGracia !== '' && this.bono.periodoGraciaMeses > 0;
     }
+
+    const cokValido = this.bono.cok !== null &&
+      this.bono.cok >= 0.03 && // 3%
+      this.bono.cok <= 0.20;  // 20%
 
     return emisorValido && bonistaValido && graciaValida;
   }

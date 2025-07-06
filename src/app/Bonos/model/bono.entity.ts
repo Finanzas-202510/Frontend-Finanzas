@@ -3,13 +3,11 @@
 export class CostosEmisor {
   estructuracionPorcentaje: number = 0;
   colocacionPorcentaje: number = 0;
-  flotacionPorcentaje: number = 0;
   cavaliPorcentaje: number = 0;
 
   constructor(data?: Partial<CostosEmisor>) {
     this.estructuracionPorcentaje = data?.estructuracionPorcentaje ?? 0;
     this.colocacionPorcentaje = data?.colocacionPorcentaje ?? 0;
-    this.flotacionPorcentaje = data?.flotacionPorcentaje ?? 0;
     this.cavaliPorcentaje = data?.cavaliPorcentaje ?? 0;
   }
 }
@@ -43,6 +41,7 @@ export class BonoEntity {
   incluirPeriodoGracia: boolean;
   tipoPeriodoGracia: 'parcial' | 'total' | ''; // 'parcial', 'total' o '' (ninguno)
   periodoGraciaMeses: number;
+  cok: number; // Valor decimal, por ejemplo, 0.08 para 8%
 
   constructor(data?: Partial<BonoEntity>) {
     this.id = data?.id || '';
@@ -63,5 +62,6 @@ export class BonoEntity {
     this.incluirPeriodoGracia = data?.incluirPeriodoGracia ?? false;
     this.tipoPeriodoGracia = data?.tipoPeriodoGracia || '';
     this.periodoGraciaMeses = data?.periodoGraciaMeses ?? 0;
+    this.cok = data?.cok ?? 0.08;
     }
 }

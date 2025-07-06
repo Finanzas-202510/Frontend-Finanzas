@@ -53,3 +53,24 @@ mat-card {
   background-color: #007a58; /* un verde más oscuro al pasar el mouse */
 }
 
+.full-width-table {
+  /* Esta clase ya la tienes en tu <table> */
+  width: 100%; /* Para que ocupe todo el ancho disponible */
+  border-collapse: separate; /* Importante: permite que border-radius funcione en las celdas */
+  border-spacing: 0; /* Elimina el espacio entre celdas para un borde continuo */
+  border-radius: 20px; /* Ajusta este valor para más o menos redondeado */
+  overflow: hidden; /* Esto es crucial para recortar el contenido de las celdas y que se vea el redondeo */
+  border: 1px solid #333; /* Borde de 1px, sólido, color gris oscuro (#333) */
+  padding: 8px;
+}
+
+
+th {
+  background-color: #f2f2f2; /* Color de fondo gris claro para los encabezados */
+  color: #333; /* Color de texto más oscuro para los encabezados, opcional */
+}
+
+/* Opcional: Asegúrate de que las celdas de datos tengan fondo blanco explícitamente */
+td {
+  background-color: #ffffff; /* Fondo blanco para las celdas de datos */
+}

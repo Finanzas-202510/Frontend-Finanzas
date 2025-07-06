@@ -23,7 +23,6 @@ import {CommonModule} from '@angular/common';
     MatButton,
     RouterLink,
     FormsModule,
-    MatPrefix,
     MatSelect,
     MatOption,
     DecimalPipe,
